@@ -1,0 +1,138 @@
+
+.locationDetails {
+  display: flex !important;
+  align-items: center;
+}
+.locationIcon {
+  margin-right: 13px;
+}
+.traveledMain {
+  display: flex;
+  align-items: end;
+}
+
+.traveledInner {
+  display: flex;
+  align-items: center;
+  white-space: nowrap !important;
+}
+.traveledInner:nth-child(2) {
+  margin-left: 34px;
+}
+.subHeading1 {
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.02em !important;
+  color: #232323 !important;
+}
+.subHeading2 {
+  font-style: normal !important;
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.02em !important;
+  color: #232323 !important;
+  margin-left: 4px !important;
+}
+.downIcon {
+  width: 16.33px;
+  height: 7px;
+}
+.cityName {
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 1 !important;
+  white-space: pre-wrap !important;
+  cursor: pointer !important;
+}
+.accDetails {
+  height: 300px !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.accDetails::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 30px;
+}
+
+.accDetails::-webkit-scrollbar-track {
+  border-radius: 30px;
+  background: whitesmoke;
+}
+
+.accDetails::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background: #1e1e1edc;
+}
+.accParentTop {
+  height: 44vh !important;
+  padding-right: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.accParentTop::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 30px;
+}
+
+.accParentTop::-webkit-scrollbar-track {
+  border-radius: 30px;
+  background: whitesmoke;
+}
+
+.accParentTop::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background: #1e1e1edc;
+}
+
+@media screen and (max-width: 1400px) {
+  .traveledInner:nth-child(2) {
+    margin-left: 14px !important;
+  }
+  .locationIcon {
+    margin-right: 8px !important;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .cityName {
+    width: 180px;
+  }
+  .subHeading1,
+  .subHeading2 {
+    font-size: 14px !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  .cityName {
+    width: 100% !important;
+  }
+  .traveled {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cityName {
+    width: 100% !important;
+  }
+  .traveled {
+    width: unset !important;
+  }
+  .accParentTop {
+    height: unset !important;
+    overflow: unset !important;
+  }
+  .accDetails {
+    height: 400px !important;
+  }
+}
+
+@media screen and (max-width: 576) {
+  .cityName {
+    width: 100% !important;
+  }
+  .traveled {
+    width: 100% !important;
+  }
+}

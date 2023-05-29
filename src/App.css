@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@600&family=Noto+Sans:wght@400;500&family=Poppins&family=Roboto:wght@500&display=swap');
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+p,h1,h2,h3,h4,h5,h6{
+  font-family: 'Roboto', sans-serif;
+}
+
+
+body {
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+.layout {
+  box-sizing: border-box !important;
+  padding: 0 10px !important;
+  margin: 0 auto !important;
+}
+.TabsHead {
+  padding-right: 28px !important;
+  padding-left: 130px;
+}
+.mapHead {
+  padding: 0 28px !important;
+}
+
+@media screen and (min-width: 1500px) {
+  .layout {
+    width: 1440px !important;
+    position: relative !important;
+    padding: 0 10px !important;
+  }
+  .TabsHead {
+    padding-right: 20px !important;
+    padding-left: 116px !important;
+  }
+  .mapHead {
+    padding: 0 20px !important;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .TabsHead {
+    padding-right: 15px !important;
+    padding-left: 100px !important;
+  }
+  .mapHead {
+    padding: 0 15px !important;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .TabsHead {
+    padding-right: 10px !important;
+    padding-left: 105px !important;
+  }
+  .mapHead {
+    padding: 0 10px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .TabsHead {
+    padding: 0 !important;
+    margin-bottom: 30px !important;
+  }
+  .mapHead {
+    padding: 0 !important;
+  }
+}

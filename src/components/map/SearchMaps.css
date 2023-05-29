@@ -1,0 +1,108 @@
+.headerStyle p {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  color: #232323;
+  margin: 0 0 30px;
+}
+.searchMap .searchTextField {
+  width: 100%;
+}
+.searchMap .btn {
+  background: #e88b71 !important;
+}
+.searchMap .MuiSlider-root {
+  color: #e88b71 !important;
+}
+.css-o4b71y-MuiAccordionSummary-content {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin: 0 !important;
+}
+.css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
+  margin: 0 !important;
+}
+.googleMapMain {
+  height: 70vh;
+  width: 100%;
+}
+
+.googleMapChild {
+  height: 70vh;
+  width: 100%;
+}
+.searchButton {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
+.slider {
+  margin-top: 0.5rem !important;
+  margin-right: 0.5rem !important;
+  margin-left: 0.5rem !important;
+}
+
+.searchMap .MuiAutocomplete-root {
+  width: 100% !important;
+  min-width: 100% !important;
+  max-width: 100% !important;
+}
+
+.googlePopup h4 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  color: #232323;
+  margin: 0;
+}
+
+.googlePopup p {
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #838383;
+  margin: 0;
+}
+.googlePopup span {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  color: #838383;
+  margin: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .googleMapMain {
+    height: 60vh !important;
+  }
+
+  .googleMapChild {
+    height: 60vh !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .googleMapMain {
+    height: 50vh !important;
+  }
+
+  .googleMapChild {
+    height: 50vh !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .headerStyle p {
+    font-size: 28px !important;
+    margin: 20px 0 18px !important;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .headerStyle p {
+    font-size: 20px !important;
+  }
+}

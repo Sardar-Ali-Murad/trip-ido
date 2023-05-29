@@ -1,0 +1,13 @@
+.pictureGrid img {
+  width: 100%;
+}
+
+.gridPlaceImg {
+  height: 110.25px !important;
+  border-radius: 5px;
+}
+
+.gridPlaceImg {
+  width: 100% !important;
+  object-fit: cover !important;
+}

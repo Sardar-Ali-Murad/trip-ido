@@ -1,0 +1,46 @@
+.topHeader {
+  box-shadow: 4px 0px 19px rgba(169, 169, 169, 0.25);
+  border-radius: 0 0 12px 12px;
+  position: relative;
+  z-index: 1;
+  background: url(../../assets/trip\ picture.png),
+    url(../../assets/road\ picture.png),
+    linear-gradient(180deg, #a6d7ff 0%, rgba(255, 255, 255, 0) 100%) !important;
+  background-size: contain, contain, 100% 100% !important;
+  background-repeat: no-repeat, no-repeat, no-repeat !important;
+  background-position: bottom 0 right 20%, bottom 0 right 35%, center !important;
+  box-sizing: border-box !important;
+  padding: 40px 32px !important;
+}
+
+.contentHead {
+  width: 50%;
+}
+@media screen and (max-width: 1200px) {
+  .topHeader {
+    background-position: bottom 0 right 5%, bottom 0 right 30%, center !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  .topHeader {
+    padding: 30px 20px !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .topHeader {
+    padding: 20px 10px !important;
+    background-position: bottom 0 right 0%, bottom 0 right 25%, center !important;
+  }
+  .contentHead {
+    width: 60% !important;
+  }
+}
+@media screen and (max-width: 576px) {
+  .topHeader {
+    background-size: 150px, contain, 100% 100% !important;
+  }
+}
+@media screen and (max-width: 350px) {
+  .topHeader {
+  }
+}

@@ -1,0 +1,282 @@
+.placeMain p,
+h2 {
+  font-family: "Roboto", sans-serif;
+}
+
+.photosGrid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.placeInfo {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 10%;
+}
+
+.address {
+  cursor: pointer;
+  color: #e88b71;
+}
+
+.name {
+  cursor: pointer;
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+}
+
+.check {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.imageNameAddressData {
+  display: flex;
+  margin-left: 50%;
+  width: 80%;
+  transform: translateX(-50%);
+}
+
+.img {
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+}
+
+.singlePlaceLinksFlexBox p:hover{
+  color: #e88b71;
+}
+
+.singlePlaceLinksGrid{
+  width: 100%;
+}
+.singlePlaceLinksFlexBox{
+  width: 100%;
+}
+
+.place{
+  padding: 30px 0px;
+}
+
+
+
+
+@media screen and (max-width: 900px) {
+  .imageNameAddressData {
+    flex-direction: column;
+  }
+}
+
+/* The Pre Css */
+
+/* The Actual Css Below */
+.places {
+  width: 100%;
+}
+.place .categoriesHeading {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #e88b71;
+  line-height: 20px;
+  margin: 0 0 0 10px !important;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+.place .placeName {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  color: #1e1e1e;
+  line-height: 20px;
+  text-transform: capitalize;
+  margin: 10px 0 0 10px !important;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+
+.MuiImageListItemBar-root {
+  border-radius: 0 0 5px 5px;
+}
+.MuiImageList-root {
+  width: 100% !important;
+  height: unset !important;
+  margin: 0 !important;
+}
+.places .placeBtn {
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.02em !important;
+  color: #383ff1 !important;
+  border: 1px solid #383ff1 !important;
+  padding: 4px 14px !important;
+  text-transform: unset !important;
+  min-width: none !important;
+  line-height: none !important;
+  margin-left: 5px !important;
+}
+.places .placeBtn:hover {
+  color: #383ff1 !important;
+  border-color: #383ff1 !important;
+}
+.totalReviews {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #232323;
+  margin: 0;
+}
+.totalReviews span {
+  color: #e88b71 !important;
+  font-size: 12px !important;
+  font-weight: 600;
+}
+.ratingBtn {
+  padding: 0 !important;
+  margin-bottom: 10px !important;
+}
+.reviewModelTitle {
+  font-style: normal !important;
+  font-weight: 900 !important;
+  font-size: 20px !important;
+  color: #232323 !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+.css-lzee2o-MuiPaper-root-MuiDialog-paper {
+  border-radius: 15px !important;
+}
+.reviewMHead {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+}
+.reviewMHead p {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  color: #232323;
+  margin: 0;
+}
+.reviewMHead span {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  letter-spacing: 0.02em;
+  color: #838383;
+  margin: 0;
+}
+.reviewModelContent::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 30px;
+}
+
+.reviewModelContent::-webkit-scrollbar-track {
+  border-radius: 30px;
+  background: whitesmoke;
+}
+
+.reviewModelContent::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background: #1e1e1edc;
+}
+.reviewModelContent .totalReview {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px;
+  background: #f2f2f2;
+  padding: 10px;
+}
+.reviewModelContent .totalReview p {
+  margin: 0;
+  margin-left: 15px !important;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  color: #513ae3;
+}
+.reviewModelContent .para {
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #838383;
+  margin: 10px 0;
+}
+
+
+
+.placeIconsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.bookLine {
+  height: 2px;
+  width: 100%;
+  background-color: whitesmoke;
+}
+
+.place {
+  width: 100%;
+}
+
+.placeMainFlex {
+  display: flex;
+  /* gap: 8px; */
+}
+
+.singlePlaceLinksGrid {
+  margin-top: 20px;
+}
+
+.singlePlaceLinksFlexBox {
+  color: #525252;
+}
+
+.singlePlaceLinksFlexBox {
+  background-color: #ffffff;
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 0px 1px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+@media screen and (max-width: 1100px) {
+  .singlePlaceLinksGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,15 @@
+.sliderBox {
+  width: "89vw" !important;
+  display: "flex";
+  flex-direction: "column";
+  justify-content: "right";
+  align-items: center;
+}
+
+.slider {
+  padding-right: "12rem";
+}
+
+.appSlider {
+  width: 50%;
+}
