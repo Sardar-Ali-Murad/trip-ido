@@ -3,9 +3,8 @@ import React, { useRef } from "react";
 import PicturesList from "../PicturesList";
 import shareIcon from "../../assets/share.png";
 import link from "../../assets/link.png";
-import hotel from "../../assets/hotel.png";
-import distance from "../../assets/distance.png";
 
+import { CgMoreR } from "react-icons/cg";
 import { Link } from "react-router-dom";
 
 import AppConst from "../../AppConst";
@@ -14,6 +13,7 @@ import ReviewModel from "./ReviewModel";
 import CircularProgress from "@mui/material/CircularProgress";
 import { setCurrentPlaceId } from "../../store/index";
 import { useSelector, useDispatch } from "react-redux";
+import Model from "./SeeMoreModel";
 
 import { Grid } from "@mui/material";
 
@@ -29,6 +29,10 @@ const Place = (prop) => {
   const currentPlaceId = useSelector(
     (state) => state.store.currentPlaceId || ""
   );
+  let [openModel, setOpenModel] = React.useState(false);
+
+  let [loading, setLoading] = React.useState(true);
+  let [website, setWebsite] = React.useState("");
 
   let [hotelLoading, setHotelLoading] = React.useState(false);
 
@@ -73,6 +77,16 @@ const Place = (prop) => {
     });
     navigator.clipboard.writeText(url);
   }
+
+  const handleSeeMore = async () => {
+    setLoading(true);
+    setOpenModel(true);
+    let { data } = await axios.get(
+      `https://tripidoserver.herokuapp.com/trip/placeDetails/${prop.selectedPlace.id}`
+    );
+    setLoading(false);
+    setWebsite(data.website);
+  };
 
   return (
     <div
@@ -127,6 +141,7 @@ const Place = (prop) => {
                   onClick={showToastMessage}
                   style={{ cursor: "pointer", height: "20px" }}
                 />
+                <CgMoreR className="seeMoreIcon" onClick={handleSeeMore} />
                 <img
                   src={shareIcon}
                   alt="hotel"
@@ -145,6 +160,12 @@ const Place = (prop) => {
           </div>
         </Grid>
       </div>
+      <Model
+        open={openModel}
+        setOpen={setOpenModel}
+        loading={loading}
+        website={website}
+      />
     </div>
   );
 };

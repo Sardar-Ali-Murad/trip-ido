@@ -17,8 +17,6 @@ const SideBar = () => {
   const category = useSelector((state) => state.store.category || undefined);
   const id = useSelector((state) => state.store.categoryId || undefined);
 
-  console.log(category, id);
-
   function handleBars() {
     setActive(true);
     setKey("bars");

@@ -13,6 +13,12 @@
   background-color: #e88b71;
 }
 
+.seeMoreIcon {
+  color: #e88b71;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .bookingFlex {
   display: flex;
   justify-content: space-between;
@@ -101,6 +107,21 @@
 .plus {
   font-size: 20px;
   cursor: pointer;
+}
+
+.seeMoreBtn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 30px;
+  background: #e88b71;
+  border: 2px solid #e88b71;
+  height: 43px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #f1f1f1;
+  font-size: 24px;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 900px) {
