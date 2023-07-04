@@ -1,4 +1,3 @@
-
 .attraction .attractionTextField {
   width: 100% !important;
 }
@@ -65,9 +64,16 @@
   pointer-events: none;
 }
 
+.attraction {
+  margin-left: -80px;
+}
+
 @media screen and (max-width: 770px) {
   .attractionCategory {
     margin-left: 0px;
     margin-top: 10px;
+  }
+  .attraction {
+    margin-left: -0px;
   }
 }

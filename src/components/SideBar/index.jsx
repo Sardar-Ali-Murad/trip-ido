@@ -2,19 +2,22 @@
 
 import React, { useState } from "react";
 import "./index.css";
-import barIcon from "../../assets/barIcon.svg";
-import museumIcon from "../../assets/museumIcon.svg";
-import parksIcon from "../../assets/parksIcon.svg";
+import barIcon from "../../assets/side1.svg";
+import museumIcon from "../../assets/side2.svg";
+import parksIcon from "../../assets/side3.svg";
+import mall from "../../assets/side4.svg";
 import { setCategoryId, setCategory } from "../../store/index";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import mall from "../../assets/mall.png";
 
 const SideBar = () => {
   let dispatch = useDispatch();
   const [active, setActive] = useState(false);
   const [key, setKey] = useState(null);
   const category = useSelector((state) => state.store.category || undefined);
+  const id = useSelector((state) => state.store.categoryId || undefined);
+
+  console.log(category, id);
 
   function handleBars() {
     setActive(true);
@@ -28,8 +31,10 @@ const SideBar = () => {
     setActive(true);
     setKey("Hotels");
 
-    dispatch(setCategory("Travel and Transportation, Lodging, Hotel"));
-    dispatch(setCategoryId(19014));
+    // dispatch(setCategory("Travel and Transportation, Lodging, Hotel"));
+    dispatch(setCategory("Dining and Drinking, Restaurant, Burger Joint"));
+    dispatch(setCategoryId(13031));
+    // dispatch(setCategoryId(19014));
   }
 
   function handleMuseums() {
@@ -49,95 +54,132 @@ const SideBar = () => {
   }
 
   return (
-    <div className="cattegory">
-      <div className="background-category">
-        <div id="boxes" onClick={handleHotels}>
-          <img
-            id="theatre-icon"
+    <div>
+      <p>Select Category</p>
+      <div className="cattegory">
+        <div className="background-category">
+          <div
+            id="boxes"
+            onClick={handleHotels}
             className={
               category == "Travel and Transportation, Lodging, Hotel" && active
-                ? "colorActive"
-                : "colorNonActive"
-            }
-            src={mall}
-            alt="theatreIcon"
-          />
-          <span
-            id="thatres"
-            className={
-              category == "Travel and Transportation, Lodging, Hotel" && active
-                ? "colorActive"
-                : "colorNonActive"
+                ? "activeBox"
+                : ""
             }
           >
-            Restaurants
-          </span>
-        </div>
-        <div id="boxes" onClick={handleMuseums}>
-          <img
-            id="museum-icon"
+            <img
+              id="theatre-icon"
+              className={
+                category == "Travel and Transportation, Lodging, Hotel" &&
+                active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+              src={mall}
+              alt="theatreIcon"
+            />
+            <span
+              id="thatres"
+              className={
+                category == "Travel and Transportation, Lodging, Hotel" &&
+                active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+            >
+              Restaurants
+            </span>
+          </div>
+          <div
+            id="boxes"
+            onClick={handleMuseums}
             className={
               category == "Arts and Entertainment, Museum" && active
-                ? "colorActive"
-                : "colorNonActive"
-            }
-            src={museumIcon}
-            alt="museumIcon"
-          />
-          <span
-            id="museums"
-            className={
-              category == "Arts and Entertainment, Museum" && active
-                ? "colorActive"
-                : "colorNonActive"
+                ? "activeBox"
+                : ""
             }
           >
-            Museums
-          </span>
-        </div>
-        <div id="boxes" onClick={handleParks}>
-          <img
-            id="parks-icon"
+            <img
+              id="museum-icon"
+              className={
+                category == "Arts and Entertainment, Museum" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+              src={museumIcon}
+              alt="museumIcon"
+            />
+            <span
+              id="museums"
+              className={
+                category == "Arts and Entertainment, Museum" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+            >
+              Museums
+            </span>
+          </div>
+          <div
+            id="boxes"
+            onClick={handleParks}
             className={
               category == "Landmarks and Outdoors, Park" && active
-                ? "colorActive"
-                : "colorNonActive"
-            }
-            src={parksIcon}
-            alt="parksIcon"
-          />
-          <span
-            id="parks"
-            className={
-              category == "Landmarks and Outdoors, Park" && active
-                ? "colorActive"
-                : "colorNonActive"
+                ? "activeBox"
+                : ""
             }
           >
-            Parks
-          </span>
-        </div>
-        <div id="boxes" onClick={handleBars}>
-          <img
-            id="bar-icon"
+            <img
+              id="parks-icon"
+              className={
+                category == "Landmarks and Outdoors, Park" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+              src={parksIcon}
+              alt="parksIcon"
+            />
+            <span
+              id="parks"
+              className={
+                category == "Landmarks and Outdoors, Park" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+            >
+              Parks
+            </span>
+          </div>
+          <div
+            id="boxes"
+            onClick={handleBars}
             className={
               category == "Dining and Drinking, Bar, Beer Bar" && active
-                ? "colorActive"
-                : "colorNonActive"
-            }
-            src={barIcon}
-            alt="barIcon"
-          />
-          <span
-            id="bars"
-            className={
-              category == "Dining and Drinking, Bar, Beer Bar" && active
-                ? "colorActive"
-                : "colorNonActive"
+                ? "activeBox"
+                : ""
             }
           >
-            Bars
-          </span>
+            <img
+              id="bar-icon"
+              className={
+                category == "Dining and Drinking, Bar, Beer Bar" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+              src={barIcon}
+              alt="barIcon"
+            />
+            <span
+              id="bars"
+              className={
+                category == "Dining and Drinking, Bar, Beer Bar" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+            >
+              Bars
+            </span>
+          </div>
         </div>
       </div>
     </div>

@@ -70,31 +70,27 @@ const Place = (prop) => {
   }
 
   return (
-    <div className="place">
-      {open && (
-        <HotelModel
-          open={open}
-          hotels={hotels}
-          setOpen={setOpen}
-          setHotels={setHotels}
-          hotelLoading={hotelLoading}
-        />
-      )}
-      <Grid container item xs={12}>
-        <div
-          className="placeMainFlex"
-          style={{ width: "98%", marginBottom: "10px" }}
-        >
-          <Grid item xs={12}>
+    <div
+      className="place"
+      onMouseEnter={() => onHoverAttraction(prop?.selectedPlace?.id)}
+    >
+      <div className="placeMainFlex">
+        {/*  */}
+        <Grid item xs={12}>
+          <div style={{ width: "100%" }}>
             {prop.selectedPlace["photos"] ? (
               <PicturesList selectedPlace={prop?.selectedPlace}></PicturesList>
             ) : (
               <div>{prop?.selectedPlace["name"]}</div>
             )}
-            <ReviewModel place={prop?.selectedPlace} />
-          </Grid>
+          </div>
+        </Grid>
 
-          <Grid item xs={12}>
+        {/*  */}
+
+        {/*  */}
+        <Grid item xs={12}>
+          <div>
             <h2
               className="categoriesHeading"
               title={prop?.selectedPlace["categories"]}
@@ -109,32 +105,40 @@ const Place = (prop) => {
             >
               {prop?.selectedPlace["name"]}
             </Link>
-
-            <div>{hotelLoading && <CircularProgress color="success" />}</div>
-            <div className="singlePlaceLinksGrid" style={{ width: "100%" }}>
-              <div className="singlePlaceLinksFlexBox" onClick={hotelHandler}>
-                <img src={hotel} alt="hotel" />
-                <p>Hotel</p>
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                }}
+              >
+                <p> {prop?.selectedPlace["address"].slice(0, 20)}...</p>
+                <img
+                  src={link}
+                  alt="hotel"
+                  onClick={showToastMessage}
+                  style={{ cursor: "pointer", height: "20px" }}
+                />
+                <img
+                  src={shareIcon}
+                  alt="hotel"
+                  onClick={share}
+                  style={{ cursor: "pointer", height: "20px" }}
+                />
               </div>
               <div
-                className="singlePlaceLinksFlexBox"
-                onClick={showToastMessage}
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
               >
-                <img src={link} alt="hotel" />
-                <p> {prop?.selectedPlace["address"].slice(0, 10)}...</p>
-              </div>
-              <div className="singlePlaceLinksFlexBox" onClick={share}>
-                <img src={shareIcon} alt="hotel" />
-                <p>Share Place</p>
-              </div>
-              <div className="singlePlaceLinksFlexBox">
-                <img src={distance} alt="hotel" />
-                <p> ({(prop?.selectedPlace?.distance / 1000).toFixed(1)}km)</p>
+                <ReviewModel place={prop?.selectedPlace} />
+                <p>({(prop?.selectedPlace?.distance / 1000).toFixed(1)}km)</p>
               </div>
             </div>
-          </Grid>
-        </div>
-      </Grid>
+            <div>{hotelLoading && <CircularProgress color="success" />}</div>
+          </div>
+        </Grid>
+      </div>
     </div>
   );
 };

@@ -27,6 +27,7 @@ import { showLoading, removeLoading } from "../../store/index";
 import { setCategoryId } from "../../store/index";
 import AutocompleteCategory from "@mui/material/Autocomplete";
 import StopSlider from "../StopSlider";
+import SideBar from "../SideBar";
 
 const SearchMaps = () => {
   const destination = useSelector(
@@ -219,6 +220,7 @@ const SearchMaps = () => {
             </Grid>
           </Grid>
         </Grid>
+        <SideBar />
         <button className={`attractionSearchButton`} onClick={handleTripMapBtn}>
           Search
         </button>

@@ -66,7 +66,7 @@
   letter-spacing: 0.02em;
   color: #e88b71;
   line-height: 20px;
-  margin: 0 0 0 10px !important;
+  /* margin: 0 0 0 10px !important; */
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -82,7 +82,7 @@
   color: #1e1e1e;
   line-height: 20px;
   text-transform: capitalize;
-  margin: 10px 0 0 10px !important;
+  /* margin: 10px 0 0 10px !important; */
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;

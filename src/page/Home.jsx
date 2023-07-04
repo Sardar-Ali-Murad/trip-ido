@@ -138,7 +138,6 @@ export default function App() {
   if (isLoaded) {
     return (
       <Box className="mainCout">
-       
         <ToastContainer />
         <Header />
         <div className="layout">
@@ -148,7 +147,7 @@ export default function App() {
             </Grid>
 
             <Grid item xs={12} md={6.8} className="TabsHead">
-              <SideBar />
+              {/* <SideBar /> */}
               {tab == 0 && (
                 <Box>
                   <AttractionSection />

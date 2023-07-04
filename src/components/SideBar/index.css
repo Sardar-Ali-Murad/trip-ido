@@ -1,22 +1,19 @@
 .cattegory {
-  color: #e88b71;
-  width: 91px;
-  height: 436px;
-  border-radius: 0 20px 20px 0;
-  box-shadow: 0px 8px 19px rgba(169, 169, 169, 0.11);
-  position: fixed;
-  top: 30%;
-  left: 0;
-  z-index: 1111;
-  background: white !important;
+  display: flex !important;
+  gap: 10px !important;
+  width: 100%;
+  flex-direction: row !important;
 }
 
 .background-category {
   height: 100%;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
   display: flex;
+  width: 100%;
+  gap: 60px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .cattegory #boxes {
@@ -25,7 +22,13 @@
   justify-content: center;
   cursor: pointer;
   align-items: center;
+  background-color: #ffffff;
+  width: 98px;
+  border-radius: 8px;
+  border: 1px solid #f3f3f3;
+  padding: 15px 16px;
 }
+
 .cattegory #boxes span {
   font-style: normal;
   font-weight: 500;
@@ -34,27 +37,26 @@
   color: #e88b71;
 }
 
-.colorActive {
-  filter: invert(8%) sepia(100%) saturate(7361%) hue-rotate(249deg)
-    brightness(95%) contrast(144%);
+.activeBox {
+  border: 1px solid #e88b71 !important;
 }
 
 .colorNonActive {
   filter: invert(56%) sepia(86%) saturate(308%) hue-rotate(324deg)
     brightness(97%) contrast(87%);
+  font-family: "Poppins", sans-serif;
 }
 
-
-@media screen and (max-width:768px) {
-  .cattegory{
+@media screen and (max-width: 768px) {
+  .cattegory {
     width: 100% !important;
     height: unset !important;
     top: unset !important;
     bottom: -10px !important;
     padding: 15px 0 !important;
-    border-radius:20px 20px 0 0 !important;
+    border-radius: 20px 20px 0 0 !important;
   }
-  .background-category{
+  .background-category {
     flex-direction: row !important;
     height: unset !important;
   }

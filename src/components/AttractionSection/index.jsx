@@ -17,6 +17,7 @@ import { pink } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import SideBar from "../SideBar";
 
 import "react-toastify/dist/ReactToastify.css";
 import debounce from "lodash/debounce";
@@ -248,7 +249,7 @@ const AttractionSection = () => {
                 checked={checked}
                 onChange={handleChange}
               />
-              <p className="roboto">Use My Current Location</p>
+              <p className="roboto">My Location</p>
             </Grid>
             {/* Category End */}
           </Grid>
@@ -266,6 +267,7 @@ const AttractionSection = () => {
               <StopSlider />
             </Grid>
           </Grid>
+          <SideBar />
           <button
             className={`attractionSearchButton ${
               loading ? "disabledButton" : ""

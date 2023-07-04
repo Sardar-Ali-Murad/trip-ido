@@ -75,88 +75,76 @@ const Place = (prop) => {
   }
 
   return (
-    // <div>
-
     <div
       className="place"
       onMouseEnter={() => onHoverAttraction(prop?.selectedPlace?.id)}
       ref={activePlace}
     >
-      {open && (
-        <HotelModel
-          open={open}
-          hotels={hotels}
-          setOpen={setOpen}
-          setHotels={setHotels}
-          hotelLoading={hotelLoading}
-        />
-      )}
-      {/* </div> */}
-      <Grid container item xs={12}>
-        <div className="placeMainFlex">
-          {/*  */}
-          <Grid item xs={12}>
-            <div style={{ width: "100%" }}>
-              {prop.selectedPlace["photos"] ? (
-                <PicturesList
-                  selectedPlace={prop?.selectedPlace}
-                ></PicturesList>
-              ) : (
-                <div>{prop?.selectedPlace["name"]}</div>
-              )}
-              <ReviewModel place={prop?.selectedPlace} />
-            </div>
-          </Grid>
+      <div className="placeMainFlex">
+        {/*  */}
+        <Grid item xs={12}>
+          <div style={{ width: "100%" }}>
+            {prop.selectedPlace["photos"] ? (
+              <PicturesList selectedPlace={prop?.selectedPlace}></PicturesList>
+            ) : (
+              <div>{prop?.selectedPlace["name"]}</div>
+            )}
+          </div>
+        </Grid>
 
-          {/*  */}
+        {/*  */}
 
-          {/*  */}
-          <Grid item xs={12}>
+        {/*  */}
+        <Grid item xs={12}>
+          <div>
+            <h2
+              className="categoriesHeading"
+              title={prop?.selectedPlace["categories"]}
+            >
+              {prop?.selectedPlace["categories"]}
+            </h2>
+
+            <Link
+              target={"_blank"}
+              to={`//www.google.com/search?q=${prop?.selectedPlace?.address}`}
+              className="placeName"
+            >
+              {prop?.selectedPlace["name"]}
+            </Link>
             <div>
-              <h2
-                className="categoriesHeading"
-                title={prop?.selectedPlace["categories"]}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "20px",
+                }}
               >
-                {prop?.selectedPlace["categories"]}
-              </h2>
-
-              <Link
-                target={"_blank"}
-                to={`//www.google.com/search?q=${prop?.selectedPlace?.address}`}
-                className="placeName"
-              >
-                {prop?.selectedPlace["name"]}
-              </Link>
-              <div>{hotelLoading && <CircularProgress color="success" />}</div>
-              <div className="singlePlaceLinksGrid">
-                <div className="singlePlaceLinksFlexBox" onClick={hotelHandler}>
-                  <img src={hotel} alt="hotel" className="smallImg" />
-                  <p>Hotel</p>
-                </div>
-                <div
-                  className="singlePlaceLinksFlexBox"
+                <p> {prop?.selectedPlace["address"].slice(0, 20)}...</p>
+                <img
+                  src={link}
+                  alt="hotel"
                   onClick={showToastMessage}
-                >
-                  <img src={link} alt="hotel" className="smallImg" />
-                  <p> {prop?.selectedPlace["address"].slice(0, 10)}...</p>
-                </div>
-                <div className="singlePlaceLinksFlexBox" onClick={share}>
-                  <img src={shareIcon} alt="hotel" className="smallImg" />
-                  <p>Share Place</p>
-                </div>
-                <div className="singlePlaceLinksFlexBox">
-                  <img src={distance} alt="hotel" className="smallImg" />
-                  <p>
-                    {" "}
-                    ({(prop?.selectedPlace?.distance / 1000).toFixed(1)}km)
-                  </p>
-                </div>
+                  style={{ cursor: "pointer", height: "20px" }}
+                />
+                <img
+                  src={shareIcon}
+                  alt="hotel"
+                  onClick={share}
+                  style={{ cursor: "pointer", height: "20px" }}
+                />
+              </div>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <ReviewModel place={prop?.selectedPlace} />
+                <p>({(prop?.selectedPlace?.distance / 1000).toFixed(1)}km)</p>
               </div>
             </div>
-            {/*  */}
-          </Grid>
-        </div>
-      </Grid>
+            <div>{hotelLoading && <CircularProgress color="success" />}</div>
+          </div>
+        </Grid>
+      </div>
     </div>
   );
 };
