@@ -139,14 +139,14 @@ export default function App() {
     return (
       <Box className="mainCout">
         <ToastContainer />
-        <Header />
+        {/* <Header /> */}
         <div className="layout">
           <Grid container className="mainhead">
             <Grid item xs={12}>
               <NavBar handleChange={handleTabValueChange} value={tab} />
             </Grid>
 
-            <Grid item xs={12} md={6.8} className="TabsHead">
+            <Grid item xs={12} md={6} className="TabsHead">
               {/* <SideBar /> */}
               {tab == 0 && (
                 <Box>
@@ -160,7 +160,7 @@ export default function App() {
                 </Box>
               )}
             </Grid>
-            <Grid item xs={12} md={5.2} className="mapHead">
+            <Grid item xs={12} md={6} className="mapHead">
               {tab === 0 ? <AttractionMap /> : <TripsMap />}
             </Grid>
           </Grid>

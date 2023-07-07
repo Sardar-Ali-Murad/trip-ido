@@ -17,22 +17,23 @@ const SideBar = () => {
   const category = useSelector((state) => state.store.category || undefined);
   const id = useSelector((state) => state.store.categoryId || undefined);
 
-  function handleBars() {
+  console.log(category);
+  console.log(id);
+
+  function handleMalls() {
     setActive(true);
     setKey("bars");
 
-    dispatch(setCategory("Dining and Drinking, Bar, Beer Bar"));
-    dispatch(setCategoryId(13006));
+    dispatch(setCategory("Retail, Shopping Mall"));
+    dispatch(setCategoryId(17114));
   }
 
   function handleHotels() {
     setActive(true);
     setKey("Hotels");
 
-    // dispatch(setCategory("Travel and Transportation, Lodging, Hotel"));
-    dispatch(setCategory("Dining and Drinking, Restaurant, Burger Joint"));
-    dispatch(setCategoryId(13031));
-    // dispatch(setCategoryId(19014));
+    dispatch(setCategory("Dining and Drinking, Restaurant"));
+    dispatch(setCategoryId(13065));
   }
 
   function handleMuseums() {
@@ -58,18 +59,15 @@ const SideBar = () => {
         <div className="background-category">
           <div
             id="boxes"
-            onClick={handleHotels}
+            onClick={handleMalls}
             className={
-              category == "Travel and Transportation, Lodging, Hotel" && active
-                ? "activeBox"
-                : ""
+              category == "Retail, Shopping Mall" && active ? "activeBox" : ""
             }
           >
             <img
               id="theatre-icon"
               className={
-                category == "Travel and Transportation, Lodging, Hotel" &&
-                active
+                category == "Retail, Shopping Mall" && active
                   ? "colorActive"
                   : "colorNonActive"
               }
@@ -79,13 +77,12 @@ const SideBar = () => {
             <span
               id="thatres"
               className={
-                category == "Travel and Transportation, Lodging, Hotel" &&
-                active
+                category == "Retail, Shopping Mall" && active
                   ? "colorActive"
                   : "colorNonActive"
               }
             >
-              Restaurants
+              Mall
             </span>
           </div>
           <div
@@ -150,9 +147,9 @@ const SideBar = () => {
           </div>
           <div
             id="boxes"
-            onClick={handleBars}
+            onClick={handleHotels}
             className={
-              category == "Dining and Drinking, Bar, Beer Bar" && active
+              category == "Dining and Drinking, Restaurant" && active
                 ? "activeBox"
                 : ""
             }
@@ -160,7 +157,7 @@ const SideBar = () => {
             <img
               id="bar-icon"
               className={
-                category == "Dining and Drinking, Bar, Beer Bar" && active
+                category == "Dining and Drinking, Restaurant" && active
                   ? "colorActive"
                   : "colorNonActive"
               }
@@ -170,12 +167,12 @@ const SideBar = () => {
             <span
               id="bars"
               className={
-                category == "Dining and Drinking, Bar, Beer Bar" && active
+                category == "Dining and Drinking, Restaurant" && active
                   ? "colorActive"
                   : "colorNonActive"
               }
             >
-              Bars
+              Restaurant
             </span>
           </div>
         </div>

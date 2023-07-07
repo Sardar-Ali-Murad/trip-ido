@@ -33,7 +33,7 @@ const Place = (prop) => {
   let [openModel, setOpenModel] = React.useState(false);
 
   let [loading, setLoading] = React.useState(true);
-  let [website, setWebsite] = React.useState("");
+  let [placeInfo, setplaceInfo] = React.useState({});
 
   let [hotelLoading, setHotelLoading] = React.useState(false);
 
@@ -82,7 +82,7 @@ const Place = (prop) => {
       `https://tripidoserver.herokuapp.com/trip/placeDetails/${prop.selectedPlace.id}`
     );
     setLoading(false);
-    setWebsite(data.website);
+    setplaceInfo(data);
   };
 
   return (
@@ -116,7 +116,7 @@ const Place = (prop) => {
 
             <Link
               target={"_blank"}
-              to={`//www.google.com/search?q=${prop?.selectedPlace?.address}`}
+              to={`//www.google.com/search?q=${prop?.selectedPlace?.name}${prop?.selectedPlace?.address}`}
               className="placeName"
             >
               {prop?.selectedPlace["name"]}
@@ -150,7 +150,11 @@ const Place = (prop) => {
                 style={{ display: "flex", alignItems: "center", gap: "10px" }}
               >
                 <ReviewModel place={prop?.selectedPlace} />
-                <p>({(prop?.selectedPlace?.distance / 1000).toFixed(1)}km)</p>
+                <div className="distanceWrapper">
+                  {(prop?.selectedPlace?.distance / 1000).toFixed(1)}
+                  <p>km</p>
+                  <p>away</p>
+                </div>
               </div>
             </div>
             <div>{hotelLoading && <CircularProgress color="success" />}</div>
@@ -161,7 +165,7 @@ const Place = (prop) => {
         open={openModel}
         setOpen={setOpenModel}
         loading={loading}
-        website={website}
+        placeInfo={placeInfo}
       />
     </div>
   );

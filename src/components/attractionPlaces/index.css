@@ -120,8 +120,17 @@
   border-radius: 10px;
   cursor: pointer;
   color: #f1f1f1;
-  font-size: 24px;
-  margin-top: 20px;
+  font-size: 20px;
+  margin-top: 17px;
+  align-items: center;
+}
+
+.distanceWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  color: #e88b71;
 }
 
 @media screen and (max-width: 900px) {

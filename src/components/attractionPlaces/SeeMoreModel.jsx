@@ -16,10 +16,12 @@ const style = {
   p: 4,
 };
 
-export default function Model({ open, setOpen, loading, website }) {
+export default function Model({ open, setOpen, loading, placeInfo }) {
   const handleClose = () => setOpen(false);
   function handleOpenWebsite() {
-    window.open(website, "_blank");
+    if (placeInfo?.website) {
+      window.open(placeInfo?.website, "_blank");
+    }
   }
   return (
     <div>
@@ -36,9 +38,18 @@ export default function Model({ open, setOpen, loading, website }) {
           {loading ? (
             <button className="seeMoreBtn">Loading...</button>
           ) : (
-            <button className="seeMoreBtn" onClick={handleOpenWebsite}>
-              See More
-            </button>
+            <div className="seeMoreModelBtns">
+              <button className="seeMoreBtn" onClick={handleOpenWebsite}>
+                {placeInfo?.website
+                  ? placeInfo?.website.slice(0, 20)
+                  : "No Website To Show"}
+              </button>
+              <button className="seeMoreBtn">
+                {placeInfo?.email
+                  ? placeInfo?.email.slice(0, 20)
+                  : "No Email To Show"}
+              </button>
+            </div>
           )}
         </Box>
       </Modal>

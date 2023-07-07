@@ -230,6 +230,14 @@
   margin-bottom: 30px;
 }
 
+.distanceWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  color: #e88b71;
+}
+
 @media screen and (max-width: 1200px) {
   .placeMainFlex {
     flex-direction: column;
