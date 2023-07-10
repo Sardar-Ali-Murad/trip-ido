@@ -14,6 +14,7 @@
   margin-bottom: 30px;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  margin-left: 50px;
 }
 
 .cattegory #boxes {
@@ -59,5 +60,6 @@
   .background-category {
     flex-direction: row !important;
     height: unset !important;
+    margin-left: 0px;
   }
 }

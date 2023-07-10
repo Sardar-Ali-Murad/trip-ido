@@ -3,12 +3,11 @@ import React, { useRef } from "react";
 import PicturesList from "../PicturesList";
 import shareIcon from "../../assets/share.png";
 import link from "../../assets/link.png";
-
+import { styled } from "@mui/material/styles";
 import { CgMoreR } from "react-icons/cg";
 import { Link } from "react-router-dom";
-
-import AppConst from "../../AppConst";
-import HotelModel from "./HotelModel";
+// import AppConst from "../../AppConst";
+// import HotelModel from "./HotelModel";
 import ReviewModel from "./ReviewModel";
 import CircularProgress from "@mui/material/CircularProgress";
 import { setCurrentPlaceId } from "../../store/index";
@@ -20,11 +19,27 @@ import { Grid } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { Button, Zoom } from "@mui/material";
+
 import axios from "axios";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#f5f5f9",
+    maxWidth: 220,
+    border: "1px solid #dadde9",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));
 
 const Place = (prop) => {
   let dispatch = useDispatch();
-  let [hotels, setHotels] = React.useState([]);
+  // let [hotels, setHotels] = React.useState([]);
   let [open, setOpen] = React.useState(false);
   const currentPlaceId = useSelector(
     (state) => state.store.currentPlaceId || ""
@@ -53,18 +68,18 @@ const Place = (prop) => {
     }
   }, [currentPlaceId]);
 
-  const hotelHandler = React.useCallback(async () => {
-    try {
-      setHotelLoading(true);
-      let url =
-        AppConst.appBaseUrl +
-        `hotels/${prop.selectedPlace.lat}/${prop.selectedPlace.lng}`;
-      let { data } = await axios.get(url);
-      setHotels(data);
-      setOpen(true);
-      setHotelLoading(false);
-    } catch (error) {}
-  }, []);
+  // const hotelHandler = React.useCallback(async () => {
+  //   try {
+  //     setHotelLoading(true);
+  //     let url =
+  //       AppConst.appBaseUrl +
+  //       `hotels/${prop.selectedPlace.lat}/${prop.selectedPlace.lng}`;
+  //     let { data } = await axios.get(url);
+  //     setHotels(data);
+  //     setOpen(true);
+  //     setHotelLoading(false);
+  //   } catch (error) {}
+  // }, []);
 
   const onHoverAttraction = (id) => {
     dispatch(setCurrentPlaceId(id));
@@ -132,9 +147,31 @@ const Place = (prop) => {
                   alignItems: "center",
                   flexWrap: "wrap",
                   gap: "20px",
+                  marginTop: "20px",
                 }}
               >
-                <p> {prop?.selectedPlace["address"].slice(0, 20)}...</p>
+                <div className="ratingHead">
+                  <HtmlTooltip
+                    TransitionComponent={Zoom}
+                    placement="top"
+                    title={
+                      <React.Fragment>
+                        <p className="totalReviews">
+                          {" "}
+                          {prop?.selectedPlace["address"]}
+                        </p>
+                      </React.Fragment>
+                    }
+                  >
+                    <Button className="ratingBtn">
+                      <p className="totalReviews">
+                        {" "}
+                        {prop?.selectedPlace["address"].slice(0, 20)}...
+                      </p>
+                    </Button>
+                  </HtmlTooltip>
+                </div>
+
                 <img
                   src={link}
                   alt="hotel"

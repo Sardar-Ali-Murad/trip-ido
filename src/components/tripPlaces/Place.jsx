@@ -1,20 +1,35 @@
 // The New
 import React from "react";
 import PicturesList from "../PicturesList";
-
 import { Link } from "react-router-dom";
-
-import AppConst from "../../AppConst";
-import HotelModel from "./HotelModel";
+// import AppConst from "../../AppConst";
+// import HotelModel from "./HotelModel";
+import { styled } from "@mui/material/styles";
 import ReviewModel from "./ReviewModel";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useSelector } from "react-redux";
 import shareIcon from "../../assets/share.png";
 import link from "../../assets/link.png";
-import hotel from "../../assets/hotel.png";
-import distance from "../../assets/distance.png";
+// import hotel from "../../assets/hotel.png";
+// import distance from "../../assets/distance.png";
 import { CgMoreR } from "react-icons/cg";
 import Model from "./SeeMoreModel";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { Button, Zoom } from "@mui/material";
+import "./places.css";
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#f5f5f9",
+    maxWidth: 220,
+    border: "1px solid #dadde9",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+}));
 
 // or
 // Mui imports
@@ -46,18 +61,18 @@ const Place = (prop) => {
     );
   };
 
-  const hotelHandler = React.useCallback(async () => {
-    try {
-      setHotelLoading(true);
-      let url =
-        AppConst.appBaseUrl +
-        `hotels/${prop?.selectedPlace?.lat}/${prop?.selectedPlace?.lng}`;
-      let { data } = await axios.get(url);
-      setHotels(data);
-      setOpen(true);
-      setHotelLoading(false);
-    } catch (error) {}
-  }, []);
+  // const hotelHandler = React.useCallback(async () => {
+  //   try {
+  //     setHotelLoading(true);
+  //     let url =
+  //       AppConst.appBaseUrl +
+  //       `hotels/${prop?.selectedPlace?.lat}/${prop?.selectedPlace?.lng}`;
+  //     let { data } = await axios.get(url);
+  //     setHotels(data);
+  //     setOpen(true);
+  //     setHotelLoading(false);
+  //   } catch (error) {}
+  // }, []);
 
   function share() {
     if (!origin || !destination) {
@@ -128,9 +143,31 @@ const Place = (prop) => {
                   alignItems: "center",
                   flexWrap: "wrap",
                   gap: "20px",
+                  marginTop: "20px",
                 }}
               >
-                <p> {prop?.selectedPlace["address"].slice(0, 20)}...</p>
+                <div className="ratingHead">
+                  <HtmlTooltip
+                    TransitionComponent={Zoom}
+                    placement="top"
+                    title={
+                      <React.Fragment>
+                        <p className="totalReviews">
+                          {" "}
+                          {prop?.selectedPlace["address"]}
+                        </p>
+                      </React.Fragment>
+                    }
+                  >
+                    <Button className="ratingBtn">
+                      <p className="totalReviews">
+                        {" "}
+                        {prop?.selectedPlace["address"].slice(0, 20)}...
+                      </p>
+                    </Button>
+                  </HtmlTooltip>
+                </div>
+
                 <img
                   src={link}
                   alt="hotel"
@@ -138,7 +175,6 @@ const Place = (prop) => {
                   style={{ cursor: "pointer", height: "20px" }}
                 />
                 <CgMoreR className="seeMoreIcon" onClick={handleSeeMore} />
-
                 <img
                   src={shareIcon}
                   alt="hotel"

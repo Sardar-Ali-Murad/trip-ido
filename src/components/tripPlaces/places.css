@@ -238,6 +238,12 @@
   color: #e88b71;
 }
 
+.seeMoreIcon {
+  color: #e88b71;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1200px) {
   .placeMainFlex {
     flex-direction: column;
