@@ -92,8 +92,8 @@ const SingleStop = ({ item, index }) => {
   }, [origin, destination]);
 
   const onStop = (item, index, latitude, longitude) => {
-    dispatch(setCategory(""));
-    dispatch(setCategoryId(""));
+    // dispatch(setCategory(""));
+    // dispatch(setCategoryId(""));
     setSelectedStop(undefined);
 
     setExpanded(expanded === index ? 100 : index);

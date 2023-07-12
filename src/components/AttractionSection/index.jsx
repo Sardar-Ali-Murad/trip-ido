@@ -163,7 +163,7 @@ const AttractionSection = () => {
     setTimeout(() => {
       getArrtactions();
     }, 1500);
-  }, [category, limit, changePlace]);
+  }, [category, limit, changePlace, radius, origin]);
 
   function handleChange() {
     setChecked(true);
@@ -268,28 +268,25 @@ const AttractionSection = () => {
             </Grid>
           </Grid>
           <SideBar />
-          <button
+          {/* <button
             className={`attractionSearchButton ${
               loading ? "disabledButton" : ""
             }`}
             onClick={handleSearchAttractions}
           >
             Search
-          </button>
-
-          {loading ? (
-            <CircularProgress />
-          ) : (
-            <Grid
-              item
-              xs={12}
-              sx={{ mt: "10px" }}
-              className="attractionPictures"
-            >
-              <AttractionPlaces />
-            </Grid>
-          )}
+          </button> */}
         </Grid>
+
+        {loading ? (
+          <div>
+            <CircularProgress />
+          </div>
+        ) : (
+          <Grid item xs={12} sx={{ mt: "10px" }} className="attractionPictures">
+            <AttractionPlaces />
+          </Grid>
+        )}
       </div>
     </>
   );

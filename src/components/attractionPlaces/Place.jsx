@@ -166,7 +166,7 @@ const Place = (prop) => {
                     <Button className="ratingBtn">
                       <p className="totalReviews">
                         {" "}
-                        {prop?.selectedPlace["address"].slice(0, 20)}...
+                        {prop?.selectedPlace["address"].slice(0, 12)}...
                       </p>
                     </Button>
                   </HtmlTooltip>
