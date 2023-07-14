@@ -60,7 +60,7 @@ const GoogleMapsContainer = () => {
 
   React.useEffect(() => {
     calculateRoute();
-  }, []);
+  }, [origin, destination]);
 
   React.useEffect(() => {
     let currentActivePlace = tripsData.find(

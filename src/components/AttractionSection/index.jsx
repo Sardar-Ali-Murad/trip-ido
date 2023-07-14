@@ -18,6 +18,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
 import SideBar from "../SideBar";
+import logo from "../../assets/logo.png";
 
 import "react-toastify/dist/ReactToastify.css";
 import debounce from "lodash/debounce";
@@ -52,10 +53,6 @@ const AttractionSection = () => {
     (state) => state.store.categoryId || undefined
   );
   let [loading, setLoading] = useState(true);
-
-  function handleSearchAttractions() {
-    getArrtactions();
-  }
 
   const displayAttractions = (data) => {
     dispatch(handleAttractionData(data));
@@ -188,6 +185,7 @@ const AttractionSection = () => {
       <div className="attraction">
         <Helmet>
           <title>{title}</title>
+          <link rel="icon" href={logo} />
           <meta
             name={`${
               attractionData
@@ -236,7 +234,7 @@ const AttractionSection = () => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} style={{ display: "flex", marginTop: "20px" }}>
+            <Grid item xs={12} style={{ display: "flex" }}>
               <Checkbox
                 {...label}
                 defaultChecked
@@ -268,14 +266,6 @@ const AttractionSection = () => {
             </Grid>
           </Grid>
           <SideBar />
-          {/* <button
-            className={`attractionSearchButton ${
-              loading ? "disabledButton" : ""
-            }`}
-            onClick={handleSearchAttractions}
-          >
-            Search
-          </button> */}
         </Grid>
 
         {loading ? (

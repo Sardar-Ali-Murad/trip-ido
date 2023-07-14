@@ -8,6 +8,7 @@ import { handleTripsData } from "../../store/index";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import logo from "../../assets/logo.png";
 
 import { showLoading, removeLoading } from "../../store/index";
 
@@ -29,7 +30,7 @@ const Stops = () => {
 
   React.useEffect(() => {
     getStops();
-  }, []);
+  }, [origin, destination]);
 
   let [title, setTitle] = React.useState(origin || "");
   React.useEffect(() => {
@@ -48,6 +49,7 @@ const Stops = () => {
     <div>
       <Helmet>
         <title>{title}</title>
+        <link rel="icon" href={logo} />
         <meta
           name={`${
             tripsData

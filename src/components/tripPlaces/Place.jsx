@@ -59,6 +59,9 @@ const Place = (prop) => {
     navigator.clipboard.writeText(
       `${prop?.selectedPlace["name"]} ${prop?.selectedPlace["address"]}`
     );
+    setTimeout(() => {
+      toast.dismiss();
+    }, 1500);
   };
 
   // const hotelHandler = React.useCallback(async () => {
@@ -79,14 +82,20 @@ const Place = (prop) => {
       toast.error(`Please Provide both the origin and the destination!`, {
         position: toast.POSITION.TOP_RIGHT,
       });
+      setTimeout(() => {
+        toast.dismiss();
+      }, 1500);
     }
 
     if (origin && destination) {
       let url = decodeURI(window.location.href);
-      toast.success(`${url} is added to the clipboard`, {
+      toast.success(`${url.slice(0, 40)}... is added to the clipboard`, {
         position: toast.POSITION.TOP_RIGHT,
       });
       navigator.clipboard.writeText(url);
+      setTimeout(() => {
+        toast.dismiss();
+      }, 1500);
     }
   }
 
@@ -168,19 +177,39 @@ const Place = (prop) => {
                   </HtmlTooltip>
                 </div>
 
-                <img
-                  src={link}
-                  alt="hotel"
-                  onClick={showToastMessage}
-                  style={{ cursor: "pointer", height: "20px" }}
-                />
+                <HtmlTooltip
+                  TransitionComponent={Zoom}
+                  placement="top"
+                  title={
+                    <React.Fragment>
+                      <p className="totalReviews">Copy Address</p>
+                    </React.Fragment>
+                  }
+                >
+                  <img
+                    src={link}
+                    alt="hotel"
+                    onClick={showToastMessage}
+                    style={{ cursor: "pointer", height: "20px" }}
+                  />
+                </HtmlTooltip>
                 <CgMoreR className="seeMoreIcon" onClick={handleSeeMore} />
-                <img
-                  src={shareIcon}
-                  alt="hotel"
-                  onClick={share}
-                  style={{ cursor: "pointer", height: "20px" }}
-                />
+                <HtmlTooltip
+                  TransitionComponent={Zoom}
+                  placement="top"
+                  title={
+                    <React.Fragment>
+                      <p className="totalReviews">Share</p>
+                    </React.Fragment>
+                  }
+                >
+                  <img
+                    src={shareIcon}
+                    alt="hotel"
+                    onClick={share}
+                    style={{ cursor: "pointer", height: "20px" }}
+                  />
+                </HtmlTooltip>
               </div>
               <div
                 style={{ display: "flex", alignItems: "center", gap: "10px" }}

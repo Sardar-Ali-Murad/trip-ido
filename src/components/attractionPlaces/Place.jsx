@@ -6,7 +6,6 @@ import link from "../../assets/link.png";
 import { styled } from "@mui/material/styles";
 import { CgMoreR } from "react-icons/cg";
 import { Link } from "react-router-dom";
-// import AppConst from "../../AppConst";
 // import HotelModel from "./HotelModel";
 import ReviewModel from "./ReviewModel";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -58,6 +57,9 @@ const Place = (prop) => {
     navigator.clipboard.writeText(
       `${prop?.selectedPlace["name"]} ${prop?.selectedPlace["address"]}`
     );
+    setTimeout(() => {
+      toast.dismiss();
+    }, 1500);
   };
 
   let activePlace = useRef();
@@ -87,10 +89,13 @@ const Place = (prop) => {
 
   function share() {
     let url = decodeURI(window.location.href);
-    toast.success(`${url} is added to the clipboard`, {
+    toast.success(`${url.slice(0, 40)}... is added to the clipboard`, {
       position: toast.POSITION.TOP_RIGHT,
     });
     navigator.clipboard.writeText(url);
+    setTimeout(() => {
+      toast.dismiss();
+    }, 1500);
   }
 
   const handleSeeMore = async () => {
@@ -172,19 +177,51 @@ const Place = (prop) => {
                   </HtmlTooltip>
                 </div>
 
-                <img
-                  src={link}
-                  alt="hotel"
-                  onClick={showToastMessage}
-                  style={{ cursor: "pointer", height: "20px" }}
-                />
-                <CgMoreR className="seeMoreIcon" onClick={handleSeeMore} />
-                <img
-                  src={shareIcon}
-                  alt="hotel"
-                  onClick={share}
-                  style={{ cursor: "pointer", height: "20px" }}
-                />
+                <HtmlTooltip
+                  TransitionComponent={Zoom}
+                  placement="top"
+                  title={
+                    <React.Fragment>
+                      <p className="totalReviews">Copy Address</p>
+                    </React.Fragment>
+                  }
+                >
+                  <img
+                    src={link}
+                    alt="hotel"
+                    onClick={showToastMessage}
+                    style={{ cursor: "pointer", height: "20px" }}
+                  />
+                </HtmlTooltip>
+
+                <HtmlTooltip
+                  TransitionComponent={Zoom}
+                  placement="top"
+                  title={
+                    <React.Fragment>
+                      <p className="totalReviews">More Info</p>
+                    </React.Fragment>
+                  }
+                >
+                  <CgMoreR className="seeMoreIcon" onClick={handleSeeMore} />
+                </HtmlTooltip>
+
+                <HtmlTooltip
+                  TransitionComponent={Zoom}
+                  placement="top"
+                  title={
+                    <React.Fragment>
+                      <p className="totalReviews">Share</p>
+                    </React.Fragment>
+                  }
+                >
+                  <img
+                    src={shareIcon}
+                    alt="hotel"
+                    onClick={share}
+                    style={{ cursor: "pointer", height: "20px" }}
+                  />
+                </HtmlTooltip>
               </div>
               <div
                 style={{ display: "flex", alignItems: "center", gap: "10px" }}

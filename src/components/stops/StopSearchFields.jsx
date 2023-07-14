@@ -14,7 +14,6 @@ import {
   handleTripsData,
 } from "../../store/index";
 import AppConst from "../../AppConst";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Autocomplete } from "@react-google-maps/api";
@@ -117,33 +116,6 @@ const SearchMaps = () => {
     dispatch(removeLoading());
   };
 
-  function handleTripMapBtn() {
-    setTimeout(() => {
-      if (
-        origin === undefined ||
-        origin === "" ||
-        destination === undefined ||
-        destination === ""
-      ) {
-        toast.error(
-          "Please Provide Both Origin And Destination To See Related Results",
-          {
-            position: toast.POSITION.TOP_RIGHT,
-          }
-        );
-      }
-      if (
-        origin !== undefined &&
-        origin !== "" &&
-        destination !== undefined &&
-        destination !== ""
-      ) {
-        calculateRoute();
-        getStops();
-      }
-    }, 1200);
-  }
-
   return (
     <div className="searchMap">
       <Grid xs={12} container justifyContent="space-between">
@@ -221,9 +193,6 @@ const SearchMaps = () => {
           </Grid>
         </Grid>
         <SideBar />
-        <button className={`attractionSearchButton`} onClick={handleTripMapBtn}>
-          Search
-        </button>
       </Grid>
     </div>
   );
