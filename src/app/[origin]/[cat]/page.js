@@ -37,11 +37,8 @@ export default function App({ params }) {
     useSelector((state) => state.store);
   let libRef = useRef(libraries);
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCf02s6yOXlZBU8ikFcFBB5bHXZWCoY_T0",
-    // Below is murad google place API there is no billing enable in it just for testing purpose
-    // googleMapsApiKey: "AIzaSyDWNrRa2YUZht-FN8M3ZzJ_i5jMbse3NlM",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
     libraries: libRef.current,
-    // libraries: ["places"],
   });
 
   let originVal;
