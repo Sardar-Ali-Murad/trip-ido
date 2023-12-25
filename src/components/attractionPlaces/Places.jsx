@@ -1,9 +1,9 @@
+"use client";
+
 import React from "react";
 import "./places.css";
-import { useSelector, useDispatch } from "react-redux"; //useStore is also an option
-// components
+import { useSelector, useDispatch } from "react-redux";
 import Place from "./Place";
-// mui
 import { Button, Grid } from "@mui/material";
 import { changeLimit, changeIsSeeMore } from "../../store/index";
 

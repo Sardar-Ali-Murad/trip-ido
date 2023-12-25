@@ -1,21 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@600&family=Noto+Sans:wght@400;500&family=Poppins&family=Roboto:wght@500&display=swap");
-* {
-  font-family: "Poppins", sans-serif !important;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  /* font-family: 'Roboto', sans-serif; */
-}
+@import url("https://fonts.googleapis.com/css2?family=Arimo&family=Roboto:wght@300;400&family=Tilt+Neon&display=swap");
 
 body {
   min-width: 100% !important;
   max-width: 100% !important;
+  font-family: "Tilt Neon", sans-serif;
 }
 
 .layout {
@@ -29,6 +17,14 @@ body {
 }
 .mapHead {
   padding: 0 28px !important;
+}
+
+button.MuiTab-root:nth-child(1) {
+  color: rgb(232, 139, 113) !important;
+}
+
+.css-1aquho2-MuiTabs-indicator {
+  background-color: #e88b71 !important;
 }
 
 @media screen and (min-width: 1500px) {

@@ -3,13 +3,8 @@ import "./stop.css";
 import { manageSpacing, splitAddress } from "../../helper";
 import { WEATHER } from "../../Constant";
 import { useDispatch } from "react-redux";
-import {
-  setCategory,
-  setCategoryId,
-  setCurrentTripPlaceId,
-} from "../../store/index";
-// Components
-// Mui imports
+import { setCurrentTripPlaceId } from "../../store/index";
+
 import {
   Accordion,
   AccordionDetails,
@@ -22,17 +17,18 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Places from "../tripPlaces/Places";
 
 // Images and Icons
-import downIcon from "../../assets/arrowDown.svg";
-import location from "../../assets/locationIcon.svg";
-import compass from "../../assets/compassIcon.svg";
-import hour from "../../assets/hourIcon.svg";
+import downIcon from "../../../public/assets/arrowDown.svg";
+import location from "../../../public/assets/locationIcon.svg";
+import compass from "../../../public/assets/compassIcon.svg";
+import hour from "../../../public/assets/hourIcon.svg";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Image from "next/image";
 
-const SingleStop = ({ item, index }) => {
+const SingleStop = ({ item, index, expanded, setExpanded }) => {
   const dispatch = useDispatch();
   const [selectedStop, setSelectedStop] = useState({});
-  const [expanded, setExpanded] = React.useState();
+  // const [expanded, setExpanded] = React.useState();
 
   // The Single Route Data
   let [routeLoading, setRouteLoading] = React.useState(true);
@@ -72,7 +68,6 @@ const SingleStop = ({ item, index }) => {
 
         url = url.replaceAll(" ", "");
         let { data } = await axios.get(url);
-        // data = data.sort((a, b) => a?.photos.length - b?.photos.length);
         data = data?.sort(function (a, b) {
           return parseFloat(a?.distance) - parseFloat(b?.distance);
         });
@@ -92,9 +87,7 @@ const SingleStop = ({ item, index }) => {
   }, [origin, destination]);
 
   const onStop = (item, index, latitude, longitude) => {
-    setSelectedStop(undefined);
-
-    setExpanded(expanded === index ? 100 : index);
+    setExpanded(expanded === index ? -1 : index);
     setSelectedStop(item);
 
     // The Single Route Data
@@ -109,8 +102,9 @@ const SingleStop = ({ item, index }) => {
       currentPlace?.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentPlaceTripId]);
+
   return (
-    <div key={index} ref={currentPlace}>
+    <div key={index} ref={currentPlace} style={{ overflowX: "hidden" }}>
       <Accordion
         defaultExpanded="true"
         expanded={index === expanded}
@@ -118,61 +112,73 @@ const SingleStop = ({ item, index }) => {
       >
         <AccordionSummary
           onClick={() => onStop(item, index, item?.latitude, item?.longitude)}
-          expandIcon={<img src={downIcon} className="downIcon" />}
+          expandIcon={
+            <Image src={downIcon} className="downIcon" height={20} width={20} />
+          }
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Box className="locationDetails">
-            <img className="locationIcon" src={location} alt="" />
-            <div>
-              {splitAddress(item?.address).map((el, index) => {
-                return index === 0 ? (
-                  <Box className="LocationName">
-                    <Typography variant="h5" className="cityName" title={el}>
-                      {el}
-                    </Typography>
-                    {item?.weather && item?.weather?.iconText ? (
-                      <Box>
-                        <img
-                          src={
-                            WEATHER.find(
-                              (i) => i?.name === item?.weather?.iconText
-                            )?.icon
-                          }
-                          alt=""
-                        />
-                        <span>{item?.weather?.temp}</span>
-                      </Box>
-                    ) : (
-                      ""
-                    )}
-                  </Box>
-                ) : index === 1 ? (
-                  <Typography className="subHeading1">{el}</Typography>
-                ) : (
-                  <Typography className="subHeading2">{el}</Typography>
-                );
-              })}
+          <div className="singleStopWrapper">
+            <div className="stopsAddressWrapper">
+              <Image
+                className="locationIcon"
+                src={location}
+                alt=""
+                height={20}
+                width={20}
+              />
+              <div className="stopAddressContent">
+                {splitAddress(item?.address).map((el, index) => {
+                  return index === 0 ? (
+                    <Box className="LocationName">
+                      <Typography variant="h7" className="cityName">
+                        {el}
+                      </Typography>
+                      {item?.weather && item?.weather?.iconText ? (
+                        <Box>
+                          {/* <Image
+                            src={
+                              WEATHER.find(
+                                (i) => i?.name === item?.weather?.iconText
+                              )?.icon
+                            }
+                            alt=""
+                            height={20}
+                            width={20}
+                          /> */}
+                          <span>{item?.weather?.temp}</span>
+                        </Box>
+                      ) : (
+                        ""
+                      )}
+                    </Box>
+                  ) : index === 1 ? (
+                    <Typography className="subHeading1">{el}</Typography>
+                  ) : (
+                    <Typography className="subHeading2">{el}</Typography>
+                  );
+                })}
+              </div>
             </div>
-          </Box>
 
-          <Box className="traveled">
-            <Typography variant="subtitle1">Traveled so far</Typography>
-            <Box className="traveledMain">
-              <Box className="traveledInner">
-                <img src={compass} alt="Travel" />
-                <Typography variant="body2">
-                  {manageSpacing(item?.distance_so_far)}
-                </Typography>
-              </Box>
-              <Box className="traveledInner">
-                <img src={hour} alt="" />
-                <Typography variant="body2">
-                  {manageSpacing(item?.travel_time_so_far)}
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
+            <div className="addresDistance">
+              <Typography>Traveled so far</Typography>
+              <dic className="stopNumbers">
+                <Box className="traveledInner">
+                  <Image src={compass} alt="Travel" height={20} width={20} />
+                  <Typography variant="body2">
+                    {manageSpacing(item?.distance_so_far)}
+                  </Typography>
+                </Box>
+                <Box className="traveledInner">
+                  <Image src={hour} alt="" height={20} width={20} />
+                  <Typography variant="body2">
+                    {manageSpacing(item?.travel_time_so_far)}
+                  </Typography>
+                </Box>
+              </dic>
+            </div>
+          </div>
         </AccordionSummary>
         <AccordionDetails key={1} className="accDetails">
           <div>
@@ -187,6 +193,7 @@ const SingleStop = ({ item, index }) => {
           </div>
         </AccordionDetails>
       </Accordion>
+      <div className="line" style={{ background: "rgb(255, 254, 254)" }}></div>
     </div>
   );
 };

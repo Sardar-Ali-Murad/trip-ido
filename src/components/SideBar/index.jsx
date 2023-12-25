@@ -1,14 +1,15 @@
-// This is the side bar where we have thearetre,museum,parks,bar on the left hand side!
+"use client";
 
 import React, { useState } from "react";
 import "./index.css";
-import barIcon from "../../assets/side1.svg";
-import museumIcon from "../../assets/side2.svg";
-import parksIcon from "../../assets/side3.svg";
-import mall from "../../assets/side4.svg";
+import barIcon from "../../../public/assets/side1.svg";
+import museumIcon from "../../../public/assets/side2.svg";
+import parksIcon from "../../../public/assets/side3.svg";
+import mall from "../../../public/assets/side4.svg";
 import { setCategoryId, setCategory } from "../../store/index";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Image from "next/image";
 
 const SideBar = () => {
   let dispatch = useDispatch();
@@ -16,9 +17,6 @@ const SideBar = () => {
   const [key, setKey] = useState(null);
   const category = useSelector((state) => state.store.category || undefined);
   const id = useSelector((state) => state.store.categoryId || undefined);
-
-  console.log(category);
-  console.log(id);
 
   function handleMalls() {
     setActive(true);
@@ -64,7 +62,7 @@ const SideBar = () => {
               category == "Retail, Shopping Mall" && active ? "activeBox" : ""
             }
           >
-            <img
+            {/* <img
               id="theatre-icon"
               className={
                 category == "Retail, Shopping Mall" && active
@@ -73,6 +71,18 @@ const SideBar = () => {
               }
               src={mall}
               alt="theatreIcon"
+            /> */}
+            <Image
+              id="theatre-icon"
+              className={
+                category == "Retail, Shopping Mall" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+              src={mall}
+              alt="theatreIcon"
+              height={60}
+              width={60}
             />
             <span
               id="thatres"
@@ -94,7 +104,7 @@ const SideBar = () => {
                 : ""
             }
           >
-            <img
+            {/* <img
               id="museum-icon"
               className={
                 category == "Arts and Entertainment, Museum" && active
@@ -103,6 +113,18 @@ const SideBar = () => {
               }
               src={museumIcon}
               alt="museumIcon"
+            /> */}
+            <Image
+              id="museum-icon"
+              className={
+                category == "Arts and Entertainment, Museum" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+              src={museumIcon}
+              alt="museumIcon"
+              height={60}
+              width={60}
             />
             <span
               id="museums"
@@ -124,7 +146,7 @@ const SideBar = () => {
                 : ""
             }
           >
-            <img
+            {/* <img
               id="parks-icon"
               className={
                 category == "Landmarks and Outdoors, Park" && active
@@ -133,6 +155,18 @@ const SideBar = () => {
               }
               src={parksIcon}
               alt="parksIcon"
+            /> */}
+            <Image
+              id="parks-icon"
+              className={
+                category == "Landmarks and Outdoors, Park" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+              src={parksIcon}
+              alt="parksIcon"
+              height={60}
+              width={60}
             />
             <span
               id="parks"
@@ -154,7 +188,7 @@ const SideBar = () => {
                 : ""
             }
           >
-            <img
+            {/* <img
               id="bar-icon"
               className={
                 category == "Dining and Drinking, Restaurant" && active
@@ -163,6 +197,18 @@ const SideBar = () => {
               }
               src={barIcon}
               alt="barIcon"
+            /> */}
+            <Image
+              id="bar-icon"
+              className={
+                category == "Dining and Drinking, Restaurant" && active
+                  ? "colorActive"
+                  : "colorNonActive"
+              }
+              src={barIcon}
+              alt="barIcon"
+              height={60}
+              width={60}
             />
             <span
               id="bars"

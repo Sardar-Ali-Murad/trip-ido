@@ -1,14 +1,12 @@
-// If You Click the "Trip Link" then below the Orgin & Destination This is there where yo see the different STops between the Orgin and the Destination this component contains that information!
+"use client";
 
 import React from "react";
-import { useSelector, useDispatch } from "react-redux"; //useStore is also an option
+import { useSelector, useDispatch } from "react-redux";
 import AppConst from "../../AppConst";
 import Stop from "./Stop";
 import { handleTripsData } from "../../store/index";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
-import { Helmet } from "react-helmet";
-import logo from "../../assets/logo.png";
 
 import { showLoading, removeLoading } from "../../store/index";
 
@@ -46,25 +44,7 @@ const Stops = () => {
   }, [category]);
 
   return (
-    <div>
-      <Helmet>
-        <title>{title}</title>
-        <link rel="icon" href={logo} />
-        <meta
-          name={`${
-            tripsData
-              ? tripsData.join(" ")
-              : "Welcome to our trip app! Discover a world of seamless travel experiences at your fingertips. Our app is designed to make your trip planning and exploration effortless and enjoyable. Browse through a wide range of destinations, find the best deals on flights and accommodations, and create personalized itineraries tailored to your preferences. With intuitive navigation and real-time updates, our trip app ensures you have access to the latest information, maps, and recommendations to enhance your journey. Whether you're a seasoned traveler or a first-time adventurer, our app is your trusted companion for unforgettable trips. Start exploring today and let our trip app be your gateway to unforgettable travel experiences"
-          }`}
-          content={`${
-            tripsData
-              ? tripsData.join(" ")
-              : "Welcome to our trip app! Discover a world of seamless travel experiences at your fingertips. Our app is designed to make your trip planning and exploration effortless and enjoyable. Browse through a wide range of destinations, find the best deals on flights and accommodations, and create personalized itineraries tailored to your preferences. With intuitive navigation and real-time updates, our trip app ensures you have access to the latest information, maps, and recommendations to enhance your journey. Whether you're a seasoned traveler or a first-time adventurer, our app is your trusted companion for unforgettable trips. Start exploring today and let our trip app be your gateway to unforgettable travel experiences"
-          }`}
-        />
-      </Helmet>
-      {loading ? <CircularProgress /> : <Stop data={tripsData}></Stop>}
-    </div>
+    <div>{loading ? <CircularProgress /> : <Stop data={tripsData}></Stop>}</div>
   );
 };
 

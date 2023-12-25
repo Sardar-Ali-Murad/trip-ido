@@ -1,4 +1,4 @@
-// If You Click the "Trip Link" You see the Origin And Destination Category and the Radius and the Search Button This compoennet contains all that!
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { Grid, TextField } from "@mui/material";
@@ -154,7 +154,7 @@ const SearchMaps = () => {
                 placeholder="To"
                 className="searchTextField"
                 // onChange={handleDestinationVal}
-                onChange={debouncedOnChangeDestination}
+                onAuxClick={debouncedOnChangeDestination}
               />
             </Autocomplete>
           </Grid>

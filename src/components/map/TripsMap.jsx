@@ -1,4 +1,4 @@
-// This map is for the trips when you click the "trip Link" and the trip tab where you the line path between the origin and destination
+"use client";
 /* global google */
 import React, { useState } from "react";
 import {
@@ -7,7 +7,7 @@ import {
   InfoWindow,
   DirectionsRenderer,
 } from "@react-google-maps/api";
-import { useSelector } from "react-redux"; //useStore is also an option
+import { useSelector } from "react-redux";
 import "./SearchMaps.css";
 
 import { useDispatch } from "react-redux";

@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getCookie } from "cookies-next";
+const origin = getCookie("origin");
+const destination = getCookie("destination");
+const category = getCookie("category");
 
 const initialState = {
-  origin: JSON.parse(localStorage.getItem("origin")) || "Rome, Italy",
-  destination:
-    JSON.parse(localStorage.getItem("destination")) || "Vienna, Austria",
-  category: "",
+  origin: origin || "Frankfurt, Germany",
+  destination: destination || "Vienna, Austria",
+  category: category || "Arts and Entertainment",
   radius: 10,
-  tab: JSON.parse(localStorage.getItem("tab")) || 0,
+  tab: 0,
   attractionData: [],
   tripsData: [],
   categoryId: "",

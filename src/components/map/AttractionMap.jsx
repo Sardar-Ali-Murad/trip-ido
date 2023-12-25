@@ -1,4 +1,4 @@
-// This is the map for the Attraction Tab if you click the "attraction Link" when the tab is 0
+"use client";
 
 /* global google */
 import React, { useState } from "react";
@@ -80,7 +80,6 @@ const GoogleMapsContainer = () => {
             }}
             options={{
               zoomControl: false,
-              // streetView: false,
               mapTypeControl: false,
               fullscreenControl: false,
             }}

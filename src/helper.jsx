@@ -16,18 +16,58 @@ export const splitAddress = (data) => {
 
 export const formatDateForReadable = (currDate) => {
   if (currDate) {
-    const newDate = new Date(currDate)
+    const newDate = new Date(currDate);
 
-    return format(newDate, 'yyyy/MM/dd HH:MM').toString().replaceAll('/', '-')
-  } else return ''
-}
+    return format(newDate, "yyyy/MM/dd HH:MM").toString().replaceAll("/", "-");
+  } else return "";
+};
 // debugger;
 export const convertor = (obj) => {
-  let arr = []
+  let arr = [];
   Object.keys(obj).map((el) => {
-    const ob = { id: +el, label: obj[el].full_label.join(', ') }
-    arr.push(ob)
-  })
-  return arr
+    const ob = { id: +el, label: obj[el].full_label.join(", ") };
+    arr.push(ob);
+  });
+  return arr;
+};
+
+export function replaceWithUnderscoreAndHyphen(str) {
+  return str ? str.replace(/, /g, "-").replace(/ /g, "_") : "";
 }
 
+export function replaceWithSpaceAndComma(str) {
+  return str ? str.replace(/-/g, ", ").replace(/_/g, " ") : "";
+}
+
+export const start = (origin, destination, category, tab, router) => {
+  if (origin !== undefined && origin !== "" && category !== undefined) {
+    origin = replaceWithUnderscoreAndHyphen(origin);
+    category = replaceWithUnderscoreAndHyphen(category);
+    destination = replaceWithUnderscoreAndHyphen(destination);
+    if (tab === 0) {
+      let pathname = "";
+      if (origin && origin !== "") {
+        pathname += `/${origin}`;
+      }
+      if (category && category !== "" && origin) {
+        pathname += `/${category}`;
+      }
+      router.push(pathname);
+    }
+    if (tab === 1) {
+      let pathname = "";
+      if (origin && origin !== "") {
+        pathname += `/${origin}`;
+      }
+      if (origin && origin !== "" && destination && destination !== "") {
+        pathname += `.${destination}`;
+      }
+      if (category && category !== "" && origin) {
+        pathname += `/${category}`;
+      }
+      {
+        router.push(pathname);
+      }
+    }
+  }
+};

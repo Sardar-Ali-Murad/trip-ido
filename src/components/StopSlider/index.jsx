@@ -1,4 +1,4 @@
-// If You click the slider we see in both the attraction and the trip tab where we can change the radius!
+"use client";
 
 import * as React from "react";
 import Box from "@mui/material/Box";

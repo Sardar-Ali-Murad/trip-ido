@@ -4,6 +4,7 @@ import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import "./PictureGrid.css";
+import Image from "next/image";
 
 export default function PicturesList(prop) {
   let photos = prop.selectedPlace["photos"];
@@ -17,24 +18,32 @@ export default function PicturesList(prop) {
   return (
     <ImageList>
       <ImageListItem key="Subheader" cols={2}></ImageListItem>
-      {photos.map((item) => (
-        <ImageListItem
-          key={item}
-          className="singlePictureGrid"
-          style={{ width: "100%" }}
-        >
-          <div className="imageWrapper" style={{ width: "100%" }}>
-            <img
-              src={`${item}?w=248&fit=crop&auto=format`}
-              srcSet={`${item}?w=248&fit=crop&auto=format&dpr=22x`}
-              loading="lazy"
-              style={{ cursor: "pointer", width: "100%" }}
-              className="singleImg imgPlaces gridPlaceImg"
-              onClick={showToastMessage}
-            />
-          </div>
-        </ImageListItem>
-      ))}
+      {photos.length === 0 ? (
+        <p className="photosErr">No Photos to Show</p>
+      ) : (
+        photos.map((item) => (
+          <ImageListItem
+            key={item}
+            className="singlePictureGrid"
+            style={{ width: "100%" }}
+          >
+            <div className="imageWrapper" style={{ width: "100%" }}>
+              <Image
+                src={`${item}?w=248&fit=crop&auto=format`}
+                style={{
+                  cursor: "pointer",
+                  width: "100%",
+                  objectFit: "contain",
+                }}
+                onClick={showToastMessage}
+                className="singleImg imgPlaces gridPlaceImg"
+                height={100}
+                width={100}
+              />
+            </div>
+          </ImageListItem>
+        ))
+      )}
     </ImageList>
   );
 }

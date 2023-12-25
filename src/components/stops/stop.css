@@ -90,6 +90,44 @@
   margin-left: -80px;
 }
 
+.stopsAddressWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.stopAddressContent {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-start;
+}
+
+.addresDistance {
+  display: flex;
+  flex-direction: column;
+}
+
+.stopNumbers {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.singleStopWrapper {
+  display: flex;
+  padding-right: 10px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 120px;
+}
+
+.singleStopLine {
+  width: 100%;
+  height: 2px;
+  background-color: rgb(255, 254, 254) !important;
+}
+
 @media screen and (max-width: 770px) {
   .searchMap,
   .accParentTop {
@@ -118,18 +156,13 @@
   .cityName {
     width: 100% !important;
   }
-  .traveled {
-    width: 100% !important;
-  }
 }
 
 @media screen and (max-width: 768px) {
   .cityName {
     width: 100% !important;
   }
-  .traveled {
-    width: unset !important;
-  }
+
   .accParentTop {
     height: unset !important;
     overflow: unset !important;
@@ -141,9 +174,6 @@
 
 @media screen and (max-width: 576) {
   .cityName {
-    width: 100% !important;
-  }
-  .traveled {
     width: 100% !important;
   }
 }

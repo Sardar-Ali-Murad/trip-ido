@@ -1,19 +1,8 @@
-.cattegory {
-  display: flex !important;
-  gap: 10px !important;
-  width: 100%;
-  flex-direction: row !important;
-}
-
 .background-category {
-  height: 100%;
-  display: flex;
-  width: 100%;
-  gap: 30px;
-  margin-top: 10px;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  margin-left: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .cattegory #boxes {
@@ -45,6 +34,13 @@
   filter: invert(56%) sepia(86%) saturate(308%) hue-rotate(324deg)
     brightness(97%) contrast(87%);
   font-family: "Poppins", sans-serif;
+}
+
+@media screen and (max-width: 1200px) {
+  .background-category {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
 }
 
 @media screen and (max-width: 768px) {

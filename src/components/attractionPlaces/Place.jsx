@@ -1,17 +1,17 @@
-// The New
+"use client";
 import React, { useRef } from "react";
 import PicturesList from "../PicturesList";
-import shareIcon from "../../assets/share.png";
-import link from "../../assets/link.png";
+import shareIcon from "../../../public/assets/share.png";
+import link from "../../../public/assets/link.png";
 import { styled } from "@mui/material/styles";
 import { CgMoreR } from "react-icons/cg";
-import { Link } from "react-router-dom";
-// import HotelModel from "./HotelModel";
+import Link from "next/link";
 import ReviewModel from "./ReviewModel";
 import CircularProgress from "@mui/material/CircularProgress";
 import { setCurrentPlaceId } from "../../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import Model from "./SeeMoreModel";
+import Image from "next/image";
 
 import { Grid } from "@mui/material";
 
@@ -38,8 +38,6 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 
 const Place = (prop) => {
   let dispatch = useDispatch();
-  // let [hotels, setHotels] = React.useState([]);
-  let [open, setOpen] = React.useState(false);
   const currentPlaceId = useSelector(
     (state) => state.store.currentPlaceId || ""
   );
@@ -69,19 +67,6 @@ const Place = (prop) => {
       activePlace?.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [currentPlaceId]);
-
-  // const hotelHandler = React.useCallback(async () => {
-  //   try {
-  //     setHotelLoading(true);
-  //     let url =
-  //       AppConst.appBaseUrl +
-  //       `hotels/${prop.selectedPlace.lat}/${prop.selectedPlace.lng}`;
-  //     let { data } = await axios.get(url);
-  //     setHotels(data);
-  //     setOpen(true);
-  //     setHotelLoading(false);
-  //   } catch (error) {}
-  // }, []);
 
   const onHoverAttraction = (id) => {
     dispatch(setCurrentPlaceId(id));
@@ -115,7 +100,6 @@ const Place = (prop) => {
       ref={activePlace}
     >
       <div className="placeMainFlex">
-        {/*  */}
         <Grid item xs={12}>
           <div style={{ width: "100%" }}>
             {prop.selectedPlace["photos"] ? (
@@ -126,9 +110,6 @@ const Place = (prop) => {
           </div>
         </Grid>
 
-        {/*  */}
-
-        {/*  */}
         <Grid item xs={12}>
           <div>
             <h2
@@ -140,7 +121,7 @@ const Place = (prop) => {
 
             <Link
               target={"_blank"}
-              to={`//www.google.com/search?q=${prop?.selectedPlace?.name}${prop?.selectedPlace?.address}`}
+              href={`//www.google.com/search?q=${prop?.selectedPlace?.name}${prop?.selectedPlace?.address}`}
               className="placeName"
             >
               {prop?.selectedPlace["name"]}
@@ -170,7 +151,6 @@ const Place = (prop) => {
                   >
                     <Button className="ratingBtn">
                       <p className="totalReviews">
-                        {" "}
                         {prop?.selectedPlace["address"].slice(0, 12)}...
                       </p>
                     </Button>
@@ -186,11 +166,12 @@ const Place = (prop) => {
                     </React.Fragment>
                   }
                 >
-                  <img
+                  <Image
                     src={link}
-                    alt="hotel"
                     onClick={showToastMessage}
                     style={{ cursor: "pointer", height: "20px" }}
+                    height={20}
+                    width={20}
                   />
                 </HtmlTooltip>
 
@@ -203,7 +184,12 @@ const Place = (prop) => {
                     </React.Fragment>
                   }
                 >
-                  <CgMoreR className="seeMoreIcon" onClick={handleSeeMore} />
+                  <h1 style={{ display: "none" }}>see more</h1>
+                  <CgMoreR
+                    className="seeMoreIcon"
+                    onClick={handleSeeMore}
+                    style={{ marginTop: "5px" }}
+                  />
                 </HtmlTooltip>
 
                 <HtmlTooltip
@@ -215,11 +201,12 @@ const Place = (prop) => {
                     </React.Fragment>
                   }
                 >
-                  <img
+                  <Image
                     src={shareIcon}
-                    alt="hotel"
                     onClick={share}
                     style={{ cursor: "pointer", height: "20px" }}
+                    height={20}
+                    width={20}
                   />
                 </HtmlTooltip>
               </div>

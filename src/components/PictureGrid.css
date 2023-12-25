@@ -11,3 +11,9 @@
   width: 100% !important;
   object-fit: cover !important;
 }
+
+.photosErr {
+  color: rgb(178, 34, 34);
+  font-size: 20px;
+  font-weight: bold;
+}

@@ -1,10 +1,7 @@
-// The New
-// This is the Places Component Which is show in the left side when the tab is 0 and when you click the "attraction" Link
-import React, { useState, useEffect } from "react";
+"use client";
+import React from "react";
 import "./places.css";
 import { formatDateForReadable } from "../../helper";
-// components
-// mui
 import {
   Button,
   Dialog,
@@ -62,6 +59,7 @@ const ReviewModel = ({ place }) => {
                 variant="h4"
                 className="ratingTooltip"
                 precision={0.1}
+                style={{ color: "black" }}
               >
                 {place?.rating / 2}
               </Typography>

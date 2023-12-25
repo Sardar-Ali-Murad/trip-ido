@@ -1,4 +1,4 @@
-// This is the Header Very Fisrt Part of the App
+"use client";
 
 import * as React from "react";
 import "./styles.css";

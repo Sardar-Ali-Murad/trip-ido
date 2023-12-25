@@ -74,16 +74,6 @@
   margin: 0;
 }
 
-/* @media screen and (max-width: 1200px) {
-  .googleMapMain {
-    height: 60vh !important;
-  }
-
-  .googleMapChild {
-    height: 60vh !important;
-  }
-} */
-
 @media screen and (max-width: 700px) {
   .googleMapMain {
     height: 50vh !important;

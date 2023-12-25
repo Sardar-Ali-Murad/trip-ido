@@ -1,4 +1,4 @@
-// This Component Contains the Attraction Tab Data in this component he have Plcaes Component as well in ../places/Places.js
+"use client";
 
 import { useState, useRef } from "react";
 import "./index.css";
@@ -6,7 +6,7 @@ import { Autocomplete } from "@react-google-maps/api";
 import { React, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import AppConst from "../../AppConst";
-import { convertor } from "../../helper";
+import { convertor, replaceWithSpaceAndComma } from "../../helper";
 import AttractionPlaces from "../attractionPlaces/Places";
 import { DROPDOWN_OBJ } from "../../Constant";
 import StopSlider from "../StopSlider";
@@ -16,13 +16,9 @@ import AutocompleteCategory from "@mui/material/Autocomplete";
 import { pink } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
 import { toast } from "react-toastify";
-import { Helmet } from "react-helmet";
 import SideBar from "../SideBar";
-import logo from "../../assets/logo.png";
-
 import "react-toastify/dist/ReactToastify.css";
 import debounce from "lodash/debounce";
-
 import axios from "axios";
 import {
   setOrigin,
@@ -31,7 +27,7 @@ import {
   handleAttractionData,
 } from "../../store/index";
 
-const AttractionSection = () => {
+const AttractionSection = (props) => {
   const origin = useSelector((state) => state.store.origin || undefined);
   let [originVal, setOriginVal] = useState(origin);
   const dispatch = useDispatch();
@@ -39,11 +35,9 @@ const AttractionSection = () => {
   const category = useSelector((state) => state.store.category || undefined);
   const radius = useSelector((state) => state.store.radius || undefined);
   const limit = useSelector((state) => state.store.limit || undefined);
-  const attractionData = useSelector(
-    (state) => state.store.attractionData || undefined
-  );
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const google = window.google;
+  const params = props.params;
 
   const [checked, setChecked] = useState(false);
 
@@ -67,6 +61,11 @@ const AttractionSection = () => {
         }
       );
     }
+    if (category === undefined || category === "") {
+      toast.error("Please Provide The Category To See Related Results", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
     if (origin !== undefined && origin !== "") {
       setLoading(true);
       let url = `${AppConst.appBaseUrl}placesWithAddress/${origin}?limit=${limit}`;
@@ -82,23 +81,18 @@ const AttractionSection = () => {
       data = data?.sort(function (a, b) {
         return parseFloat(a?.distance) - parseFloat(b?.distance);
       });
-      // data = data.sort((a, b) => a?.photos.length - b?.photos.length);
       displayAttractions(data);
       setLoading(false);
     }
   };
 
   function handleOrigin(e) {
-    dispatch(setCategory(""));
-    dispatch(setCategoryId(""));
     setOriginVal(e.target.value);
   }
 
   const debouncedOnChange = debounce(handleOrigin, 1000);
 
   function placeChanged() {
-    dispatch(setCategory(""));
-    dispatch(setCategoryId(""));
     setOriginVal(originRef?.current?.value);
     setChangePlace((pre) => !pre);
   }
@@ -107,7 +101,6 @@ const AttractionSection = () => {
     dispatch(setOrigin(originVal));
   }, [originVal]);
 
-  // Handling the Category and the Category Id
   let categoriesData = convertor(DROPDOWN_OBJ);
 
   function handleCategoryChange(e, data) {
@@ -130,6 +123,9 @@ const AttractionSection = () => {
         }
       );
       navigator.geolocation.getCurrentPosition(geoSuccess);
+      setTimeout(() => {
+        toast.dismiss();
+      }, 1500);
     }
   };
 
@@ -140,6 +136,9 @@ const AttractionSection = () => {
     toast.success("Please Wait To Get Results Near You!", {
       position: toast.POSITION.TOP_RIGHT,
     });
+    setTimeout(() => {
+      toast.dismiss();
+    }, 1500);
   };
 
   const getReverseGeocodingData = (lat, lng) => {
@@ -180,25 +179,30 @@ const AttractionSection = () => {
     setTitle(titleString);
   }, [category]);
 
+  let originValue;
+  let destinationVal;
+  let categoryVal;
+
+  if (typeof window !== "undefined") {
+    originVal = replaceWithSpaceAndComma(params?.origin.split(".")[0]);
+    destinationVal = replaceWithSpaceAndComma(params?.origin.split(".")[1]);
+    categoryVal = replaceWithSpaceAndComma(params?.cat);
+  }
+
+  useEffect(() => {
+    // Check if it's the first load
+    const isFirstLoad = sessionStorage.getItem("isFirstLoad") === null;
+    if (isFirstLoad && !originValue && !destinationVal && !categoryVal) {
+      // Run your function on the first load
+      getLocation();
+      // Set a flag in local storage to indicate that it's not the first load anymore
+      sessionStorage.setItem("isFirstLoad", "false");
+    }
+  }, []);
+
   return (
     <>
       <div className="attraction">
-        <Helmet>
-          <title>{title}</title>
-          <link rel="icon" href={logo} />
-          <meta
-            name={`${
-              attractionData
-                ? attractionData.join(" ")
-                : "Welcome to our trip app! Discover a world of seamless travel experiences at your fingertips. Our app is designed to make your trip planning and exploration effortless and enjoyable. Browse through a wide range of destinations, find the best deals on flights and accommodations, and create personalized itineraries tailored to your preferences. With intuitive navigation and real-time updates, our trip app ensures you have access to the latest information, maps, and recommendations to enhance your journey. Whether you're a seasoned traveler or a first-time adventurer, our app is your trusted companion for unforgettable trips. Start exploring today and let our trip app be your gateway to unforgettable travel experiences"
-            }`}
-            content={`${
-              attractionData
-                ? attractionData.join(" ")
-                : "Welcome to our trip app! Discover a world of seamless travel experiences at your fingertips. Our app is designed to make your trip planning and exploration effortless and enjoyable. Browse through a wide range of destinations, find the best deals on flights and accommodations, and create personalized itineraries tailored to your preferences. With intuitive navigation and real-time updates, our trip app ensures you have access to the latest information, maps, and recommendations to enhance your journey. Whether you're a seasoned traveler or a first-time adventurer, our app is your trusted companion for unforgettable trips. Start exploring today and let our trip app be your gateway to unforgettable travel experiences"
-            }`}
-          />
-        </Helmet>
         <Grid container xs={12} justifyContent="space-between">
           <Grid container item xs={12}>
             <Grid item xs={12} md={6}>
@@ -207,19 +211,16 @@ const AttractionSection = () => {
                   className="attractionTextField"
                   error
                   defaultValue={originVal}
-                  // value={originVal}
                   id="currrentLocation"
                   label="Provide Location"
                   variant="outlined"
                   inputRef={originRef}
                   placeholder="Your Location"
-                  // onChange={handleOrigin}
-                  onChange={debouncedOnChange}
+                  onAuxClick={debouncedOnChange}
                 />
               </Autocomplete>
             </Grid>
             <Grid item xs={12} md={6}>
-              {/* Category Start */}
               <AutocompleteCategory
                 disablePortal
                 id="category"
@@ -234,7 +235,7 @@ const AttractionSection = () => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} style={{ display: "flex" }}>
+            {/* <Grid item xs={12} style={{ display: "flex" }}>
               <Checkbox
                 {...label}
                 defaultChecked
@@ -248,8 +249,7 @@ const AttractionSection = () => {
                 onChange={handleChange}
               />
               <p className="roboto">My Location</p>
-            </Grid>
-            {/* Category End */}
+            </Grid> */}
           </Grid>
           <Grid
             item
