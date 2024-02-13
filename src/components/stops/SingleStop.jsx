@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./stop.css";
 import { manageSpacing, splitAddress } from "../../helper";
-import { WEATHER } from "../../Constant";
 import { useDispatch } from "react-redux";
 import { setCurrentTripPlaceId } from "../../store/index";
 
@@ -27,26 +26,21 @@ import Image from "next/image";
 
 const SingleStop = ({ item, index, expanded, setExpanded }) => {
   const dispatch = useDispatch();
-  const [selectedStop, setSelectedStop] = useState({});
-  // const [expanded, setExpanded] = React.useState();
+  let [selectedStop, setSelectedStop] = useState({});
+  let [routeLoading, setRouteLoading] = useState(true);
+  let [latitude, setLatitude] = useState();
+  let [longitude, setLongitude] = useState();
+  let [routeData, setRouteData] = useState([]);
 
-  // The Single Route Data
-  let [routeLoading, setRouteLoading] = React.useState(true);
-  let [latitude, setLatitude] = React.useState();
-  let [longitude, setLongitude] = React.useState();
-  let [routeData, setRouteData] = React.useState([]);
-  const origin = useSelector((state) => state.store.origin || undefined);
-  const currentPlaceTripId = useSelector(
-    (state) => state.store.currentPlaceTripId || undefined
-  );
-  const destination = useSelector(
-    (state) => state.store.destination || undefined
-  );
-  const categoryId = useSelector(
-    (state) => state.store.categoryId || undefined
-  );
-  const radius = useSelector((state) => state.store.radius || undefined);
-  let limit = useSelector((state) => state.store.limit);
+  const { origin, currentPlaceTripId, destination, categoryId, radius, limit } =
+    useSelector((state) => state.store);
+
+  const onStop = (item, index, latitude, longitude) => {
+    setExpanded(expanded === index ? -1 : index);
+    setSelectedStop(item);
+    setLatitude(latitude);
+    setLongitude(longitude);
+  };
 
   React.useEffect(() => {
     if (latitude && longitude) {
@@ -85,15 +79,6 @@ const SingleStop = ({ item, index, expanded, setExpanded }) => {
     setRouteData([]);
     setSelectedStop({});
   }, [origin, destination]);
-
-  const onStop = (item, index, latitude, longitude) => {
-    setExpanded(expanded === index ? -1 : index);
-    setSelectedStop(item);
-
-    // The Single Route Data
-    setLatitude(latitude);
-    setLongitude(longitude);
-  };
 
   let currentPlace = React.useRef(null);
 
@@ -136,16 +121,6 @@ const SingleStop = ({ item, index, expanded, setExpanded }) => {
                       </Typography>
                       {item?.weather && item?.weather?.iconText ? (
                         <Box>
-                          {/* <Image
-                            src={
-                              WEATHER.find(
-                                (i) => i?.name === item?.weather?.iconText
-                              )?.icon
-                            }
-                            alt=""
-                            height={20}
-                            width={20}
-                          /> */}
                           <span>{item?.weather?.temp}</span>
                         </Box>
                       ) : (

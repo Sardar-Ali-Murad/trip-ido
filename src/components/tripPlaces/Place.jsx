@@ -38,10 +38,8 @@ import axios from "axios";
 const Place = (prop) => {
   let { origin, category, destination } = useSelector((state) => state.store);
   let [openModel, setOpenModel] = React.useState(false);
-
   let [loading, setLoading] = React.useState(true);
   let [placeInfo, setplaceInfo] = React.useState({});
-
   let [hotelLoading, setHotelLoading] = React.useState(false);
 
   const showToastMessage = () => {

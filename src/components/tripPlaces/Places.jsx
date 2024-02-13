@@ -9,13 +9,10 @@ import { changeLimit, changeIsSeeMore } from "../../store/index";
 const Places = ({ routeData, loading }) => {
   let dispatch = useDispatch();
   let isSeeMore = useSelector((state) => state.store.isSeeMore);
-
   const attractions = routeData;
-
   if (attractions.length <= 1) {
     return <p>No data to dispaly in this route Or with these filters!</p>;
   }
-
   const seeMore = () => {
     dispatch(changeIsSeeMore(false));
     dispatch(changeLimit(50));

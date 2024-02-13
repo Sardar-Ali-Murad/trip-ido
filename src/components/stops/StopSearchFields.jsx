@@ -5,47 +5,30 @@ import { Grid, TextField } from "@mui/material";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import debounce from "lodash/debounce";
-
-import {
-  setCategory,
-  setOrigin,
-  setDestination,
-  setDirectionsResponse,
-  handleTripsData,
-} from "../../store/index";
-import AppConst from "../../AppConst";
+import { setCategory, setOrigin, setDestination } from "../../store/index";
 import "react-toastify/dist/ReactToastify.css";
-
 import { Autocomplete } from "@react-google-maps/api";
-import axios from "axios";
 import { DROPDOWN_OBJ } from "../../Constant";
 import { convertor } from "../../helper";
-
-import { showLoading, removeLoading } from "../../store/index";
-
 import { setCategoryId } from "../../store/index";
 import AutocompleteCategory from "@mui/material/Autocomplete";
 import StopSlider from "../StopSlider";
 import SideBar from "../SideBar";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const SearchMaps = () => {
-  const destination = useSelector(
-    (state) => state.store.destination || undefined
-  );
-
-  const origin = useSelector((state) => state.store.origin || undefined);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const originRef = useRef();
+  const destinationRef = useRef();
+  let categoriesData = convertor(DROPDOWN_OBJ);
+  const { destination, origin, category } = useSelector((state) => state.store);
 
   let [originVal, setOriginVal] = useState(origin);
   let [destinationVal, setDestinationVal] = useState(destination);
-  const dispatch = useDispatch();
-
-  // debugger
-  const originRef = useRef();
-  const destinationRef = useRef();
-
-  // The Bebouncing For THE ORIGIN
-
-  // The Destination
+  let [inputValue, setInputValue] = useState(category);
+  let [routerChange, setRouterChange] = React.useState(false);
 
   function handleDestinationVal(e) {
     setDestinationVal(e?.target?.value);
@@ -53,37 +36,18 @@ const SearchMaps = () => {
 
   const debouncedOnChangeDestination = debounce(handleDestinationVal, 1000);
 
-  function destinationChanged(e) {
-    setDestinationVal(destinationRef?.current?.value);
+  function destinationChanged() {
+    setRouterChange((pre) => !pre);
   }
 
-  useEffect(() => {
-    dispatch(setDestination(destinationVal));
-  }, [destinationVal]);
-
-  // The Origin
   function handleOriginVal(e) {
     setOriginVal(e.target.value);
   }
 
-  const debouncedOnChangeOrigin = debounce(handleOriginVal, 1000);
-
-  function originChanged() {
-    setOriginVal(originRef?.current?.value);
-  }
-
-  useEffect(() => {
-    dispatch(setOrigin(originVal));
-  }, [originVal]);
-
-  const category = useSelector((state) => state.store.category || undefined);
-  let categoriesData = convertor(DROPDOWN_OBJ);
   function handleCategoryChange(e, data) {
     dispatch(setCategory(data?.label));
     dispatch(setCategoryId(data?.id));
   }
-
-  const [inputValue, setInputValue] = useState(category);
 
   function inputChanged(e, value) {
     setInputValue(value);
@@ -92,29 +56,41 @@ const SearchMaps = () => {
   // The Seach Btn Of Trip Functions
   /* global google */
 
-  const calculateRoute = async () => {
-    let loc1 = null;
-    let loc2 = null;
-    loc1 = origin;
-    loc2 = destination;
-    const directionsService = new google.maps.DirectionsService();
-    const results = await directionsService.route({
-      origin: loc1,
-      destination: loc2,
-      travelMode: google.maps.TravelMode.DRIVING,
-    });
-    dispatch(setDirectionsResponse(results));
-  };
+  const debouncedOnChangeOrigin = debounce(handleOriginVal, 1000);
 
-  const getStops = async () => {
-    // debugger
-    dispatch(showLoading());
-    let url = AppConst.appBaseUrl + "stops?route=" + origin + ":" + destination;
-    url = url.replaceAll(" ", "");
-    let { data } = await axios.get(url);
-    dispatch(handleTripsData(data));
-    dispatch(removeLoading());
-  };
+  function originChanged() {
+    setRouterChange((pre) => !pre);
+  }
+
+  useEffect(() => {
+    dispatch(setDestination(destinationVal));
+  }, [destinationVal]);
+
+  useEffect(() => {
+    dispatch(setOrigin(originVal));
+  }, [originVal]);
+
+  React.useEffect(() => {
+    if (
+      originRef?.current?.value === "" ||
+      destinationRef?.current?.value === ""
+    ) {
+      toast.error("Please provide both destination and origin");
+    } else {
+      const filteredOriginValue = originRef?.current?.value
+        .replace(/, /g, "-")
+        .replace(/ /g, "_");
+      const filteredDestinationValue = destinationRef?.current?.value
+        .replace(/, /g, "-")
+        .replace(/ /g, "_");
+      const filteredCategoryValue = category
+        .replace(/, /g, "-")
+        .replace(/ /g, "_");
+      router.push(
+        `/${filteredOriginValue}.${filteredDestinationValue}/${filteredCategoryValue}`
+      );
+    }
+  }, [routerChange]);
 
   return (
     <div className="searchMap">
@@ -137,8 +113,7 @@ const SearchMaps = () => {
                 inputRef={originRef}
                 placeholder="From"
                 className="searchTextField"
-                // onChange={handleOriginVal}
-                onChange={debouncedOnChangeOrigin}
+                onAuxClick={debouncedOnChangeOrigin}
               />
             </Autocomplete>
           </Grid>
@@ -153,7 +128,6 @@ const SearchMaps = () => {
                 inputRef={destinationRef}
                 placeholder="To"
                 className="searchTextField"
-                // onChange={handleDestinationVal}
                 onAuxClick={debouncedOnChangeDestination}
               />
             </Autocomplete>
@@ -165,12 +139,10 @@ const SearchMaps = () => {
               id="category"
               sx={{ minWidth: "14rem", maxWidth: "97vw" }}
               onChange={handleCategoryChange}
-              // inputRef={categoryRef}
               onInputChange={inputChanged}
               inputValue={inputValue || ""}
               value={category || ""}
               options={categoriesData}
-              // isOptionEqualToValue={(option, value) => option.value === value.value}
               renderInput={(params) => (
                 <TextField {...params} error label="Categories" />
               )}

@@ -15,9 +15,9 @@ const Stops = () => {
   const { origin, destination, tripsData, loading, category } = useSelector(
     (state) => state.store
   );
+  let [title, setTitle] = React.useState(origin || "");
 
   const getStops = async () => {
-    // debugger
     dispatch(showLoading());
     let url = AppConst.appBaseUrl + "stops?route=" + origin + ":" + destination;
     url = url.replaceAll(" ", "");
@@ -30,7 +30,6 @@ const Stops = () => {
     getStops();
   }, [origin, destination]);
 
-  let [title, setTitle] = React.useState(origin || "");
   React.useEffect(() => {
     let titleString = origin;
     if (destination) {
@@ -39,7 +38,6 @@ const Stops = () => {
     if (category) {
       titleString = titleString + `/${category}`;
     }
-
     setTitle(titleString);
   }, [category]);
 

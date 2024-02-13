@@ -13,12 +13,11 @@ import StopSlider from "../StopSlider";
 import { Grid, TextField } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import AutocompleteCategory from "@mui/material/Autocomplete";
-import { pink } from "@mui/material/colors";
-import Checkbox from "@mui/material/Checkbox";
 import { toast } from "react-toastify";
 import SideBar from "../SideBar";
 import "react-toastify/dist/ReactToastify.css";
 import debounce from "lodash/debounce";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import {
   setOrigin,
@@ -28,31 +27,26 @@ import {
 } from "../../store/index";
 
 const AttractionSection = (props) => {
-  const origin = useSelector((state) => state.store.origin || undefined);
-  let [originVal, setOriginVal] = useState(origin);
+  const router = useRouter();
   const dispatch = useDispatch();
+  const { destination, origin, category, radius, limit, categoryId } =
+    useSelector((state) => state.store);
+
+  let [originVal, setOriginVal] = useState(origin);
+  let [loading, setLoading] = useState(true);
+  let [routerCall, setRouterCall] = useState(false);
+  let [changePlace, setChangePlace] = useState(false);
+  let [inputValue, setInputValue] = useState(category);
+
   const originRef = useRef(null);
-  const category = useSelector((state) => state.store.category || undefined);
-  const radius = useSelector((state) => state.store.radius || undefined);
-  const limit = useSelector((state) => state.store.limit || undefined);
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const google = window.google;
   const params = props.params;
-
-  const [checked, setChecked] = useState(false);
-
-  let [changePlace, setChangePlace] = useState(false);
-
-  const categoryId = useSelector(
-    (state) => state.store.categoryId || undefined
-  );
-  let [loading, setLoading] = useState(true);
 
   const displayAttractions = (data) => {
     dispatch(handleAttractionData(data));
   };
 
-  const getArrtactions = async () => {
+  const getAttractions = async () => {
     if (origin === undefined || origin === "") {
       toast.error(
         "Please Provide The Current Location To See Related Results",
@@ -93,13 +87,9 @@ const AttractionSection = (props) => {
   const debouncedOnChange = debounce(handleOrigin, 1000);
 
   function placeChanged() {
-    setOriginVal(originRef?.current?.value);
-    setChangePlace((pre) => !pre);
+    setOrigin(originRef?.current?.value);
+    setRouterCall((pre) => !pre);
   }
-
-  useEffect(() => {
-    dispatch(setOrigin(originVal));
-  }, [originVal]);
 
   let categoriesData = convertor(DROPDOWN_OBJ);
 
@@ -107,8 +97,6 @@ const AttractionSection = (props) => {
     dispatch(setCategory(data?.label));
     dispatch(setCategoryId(data?.id));
   }
-
-  const [inputValue, setInputValue] = useState(category);
 
   function inputChanged(e, value) {
     setInputValue(value);
@@ -157,26 +145,15 @@ const AttractionSection = (props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      getArrtactions();
+      getAttractions();
     }, 1500);
   }, [category, limit, changePlace, radius, origin]);
 
-  function handleChange() {
-    setChecked(true);
-    getLocation();
-    setTimeout(() => {
-      setChecked(false);
-    }, 5000);
-  }
-
-  let [title, setTitle] = useState(origin || "");
   useEffect(() => {
     let titleString = origin;
     if (category) {
       titleString = titleString + `/${category}`;
     }
-
-    setTitle(titleString);
   }, [category]);
 
   let originValue;
@@ -188,6 +165,20 @@ const AttractionSection = (props) => {
     destinationVal = replaceWithSpaceAndComma(params?.origin.split(".")[1]);
     categoryVal = replaceWithSpaceAndComma(params?.cat);
   }
+
+  useEffect(() => {
+    const filteredOriginValue = originRef?.current?.value
+      .replace(/, /g, "-")
+      .replace(/ /g, "_");
+    const filteredCategoryValue = category
+      .replace(/, /g, "-")
+      .replace(/ /g, "_");
+    router.push(`/${filteredOriginValue}/${filteredCategoryValue}`);
+  }, [routerCall, destination]);
+
+  useEffect(() => {
+    dispatch(setOrigin(originVal));
+  }, [originVal]);
 
   useEffect(() => {
     // Check if it's the first load
@@ -235,21 +226,6 @@ const AttractionSection = (props) => {
                 )}
               />
             </Grid>
-            {/* <Grid item xs={12} style={{ display: "flex" }}>
-              <Checkbox
-                {...label}
-                defaultChecked
-                sx={{
-                  color: pink[800],
-                  "&.Mui-checked": {
-                    color: pink[600],
-                  },
-                }}
-                checked={checked}
-                onChange={handleChange}
-              />
-              <p className="roboto">My Location</p>
-            </Grid> */}
           </Grid>
           <Grid
             item

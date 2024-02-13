@@ -35,6 +35,7 @@ export default function PicturesList(prop) {
                   width: "100%",
                   objectFit: "contain",
                 }}
+                alt="img"
                 onClick={showToastMessage}
                 className="singleImg imgPlaces gridPlaceImg"
                 height={100}

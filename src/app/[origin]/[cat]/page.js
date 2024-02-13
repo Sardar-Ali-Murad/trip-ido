@@ -37,7 +37,8 @@ export default function App({ params }) {
     useSelector((state) => state.store);
   let libRef = useRef(libraries);
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
+    // This below key is fake
+    googleMapsApiKey: "AIzaSyDWNrRa2YUZht-FN8M3ZzJ_i5jMbse3NlM",
     libraries: libRef.current,
   });
 

@@ -5,7 +5,9 @@ body {
   max-width: 100% !important;
   font-family: "Tilt Neon", sans-serif;
 }
-
+.Toastify__toast-body > div:last-child {
+  font-family: "Tilt Neon", sans-serif !important;
+}
 .layout {
   box-sizing: border-box !important;
   padding: 0 10px !important;

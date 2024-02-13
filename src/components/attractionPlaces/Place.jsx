@@ -42,10 +42,8 @@ const Place = (prop) => {
     (state) => state.store.currentPlaceId || ""
   );
   let [openModel, setOpenModel] = React.useState(false);
-
   let [loading, setLoading] = React.useState(true);
   let [placeInfo, setplaceInfo] = React.useState({});
-
   let [hotelLoading, setHotelLoading] = React.useState(false);
 
   const showToastMessage = () => {
@@ -61,12 +59,6 @@ const Place = (prop) => {
   };
 
   let activePlace = useRef();
-
-  React.useEffect(() => {
-    if (currentPlaceId === prop.selectedPlace.id) {
-      activePlace?.current?.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [currentPlaceId]);
 
   const onHoverAttraction = (id) => {
     dispatch(setCurrentPlaceId(id));
@@ -92,6 +84,12 @@ const Place = (prop) => {
     setLoading(false);
     setplaceInfo(data);
   };
+
+  React.useEffect(() => {
+    if (currentPlaceId === prop.selectedPlace.id) {
+      activePlace?.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [currentPlaceId]);
 
   return (
     <div
@@ -172,6 +170,7 @@ const Place = (prop) => {
                     style={{ cursor: "pointer", height: "20px" }}
                     height={20}
                     width={20}
+                    alt="img"
                   />
                 </HtmlTooltip>
 
@@ -207,6 +206,7 @@ const Place = (prop) => {
                     style={{ cursor: "pointer", height: "20px" }}
                     height={20}
                     width={20}
+                    alt="img"
                   />
                 </HtmlTooltip>
               </div>

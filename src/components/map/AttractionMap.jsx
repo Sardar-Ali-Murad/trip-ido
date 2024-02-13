@@ -4,10 +4,9 @@
 import React, { useState } from "react";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { Button } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux"; //useStore is also an option
-import "./SearchMaps.css";
-
+import { useSelector, useDispatch } from "react-redux";
 import { setCurrentPlaceId } from "../../store/index";
+import "./SearchMaps.css";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -16,16 +15,14 @@ import PlacesAutocomplete, {
 
 const GoogleMapsContainer = () => {
   let dispatch = useDispatch();
-  let [latitude, setLatitude] = React.useState(0);
-  let [longitute, setLongitude] = React.useState(0);
-
-  const [map, setMap] = useState(/**@type google.maps.Map */ (null));
-
-  const origin = useSelector((state) => state.store.origin);
   const attractions = useSelector((state) => state.store.attractionData);
+  let { currentPlaceId, origin } = useSelector((state) => state.store);
+
+  let [latitude, setLatitude] = useState(0);
+  let [longitute, setLongitude] = useState(0);
   const [selectedMarker, setSelectedMarker] = useState(null);
 
-  let { currentPlaceId } = useSelector((state) => state.store);
+  const [map, setMap] = useState(/**@type google.maps.Map */ (null));
 
   // ----------------
   const onMarkerClick = (marker, id) => {
